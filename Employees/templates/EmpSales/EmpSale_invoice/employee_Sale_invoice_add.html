@@ -1,0 +1,319 @@
+{% extends "employee_base.html" %}
+{%load static%}
+{%block body_block%}
+
+<div class="addinvoice">
+    <h5 class="pb-4 border-bottom border-grey">Sales > Stay > Invoice</h5>
+    <h5 class="text-uppercase pt-4 pb-4">add invoice details</h5>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="add-invoice">
+            <div class="d-flex  pt-4">
+                <div class="mb-4 align-self-center">
+                    <label for="" class="lable-ei" style="width: 162px;">Customer name</label>
+                </div>
+                <div class=" mb-4 position-relative flex-grow-1">
+                    <div class="position-relative">
+                        <input type="hidden" name="customer_id" id="customer_id"/>
+                        <input class="form-control py-3" placeholder="Start typing..." type="search"
+                               name="customer_name" id="searchInput" autocomplete="off" required/>
+                           <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search position-absolute top-50 end-0 translate-middle-y"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+                    </div>
+                    <ul id="suggestions" style="display: none;">
+                        <!-- Rendered Django suggestions -->
+                        {% for customer in customers %}
+                        <li class="suggestion" data-id="{{ customer.id }}"><span>{{ customer.full_name }}</span></li>
+                        {% endfor %}
+                    </ul>
+
+
+                    <!-- Add the following dropdown for dynamically updating customer names -->
+
+                </div>
+                </div>
+
+            <div class="d-flex flex-direction-row mt-4">
+                <label class="pt-3 invoice-number lable-ei">Invoice Number :</label>
+                <input type="text" name="invoice_number" class="form-control py-3 px-5 rounded-3 border border-primary" style="width: 200px;" value="{{ next_invoice_number }}" readonly>
+            </div>
+
+
+            <div class="d-flex  gap-5">
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 invoice-date lable-ei">Invoice Date :</label>
+                    <div class="position-relative">
+                        <input type="date" class="form-control py-3 text-dark" name="invoice_date" placeholder="dd-mm-yy" required>
+                        <i class=""></i>
+                    </div>
+                </div>
+            
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei">Due Date :</label>
+                    <div class="position-relative ms-4">
+                        <input type="date" name="due_date" class="form-control py-3 px-3 text-dark" placeholder="dd-mm-yy" required>
+                        <i class=""></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-direction-row mt-4">
+                <label class="pt-3 lable-ei">Sales Person :</label>
+                <select class="form-select py-3 text-dark" name="sales_person" aria-label="Default select example" required>
+                    <option value="" selected disabled>Select Sales Person</option>
+                    {% for user in sales_persons %}
+                    <option value="{{ user.id }}" {% if user.id == invoice.sales_person.id %} selected {% endif %}>{{ user.username }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- package details-------------------- -->
+            <div class="mt-5">
+                <h5 class="pb-4 border-bottom text-uppercase border-grey">Package Details</h5>
+
+                <div class="d-flex flex-direction-row mt-5">
+                    <label class="pt-3 text-dark lable-ei">Resort Name :</label>
+                    <select name="resort_name" id="resort_name" class="form-select text-dark" required>
+                        <option value="" selected disabled>Select Resort</option>
+                        {% for resort in resorts %}
+                            <option value="{{ resort.id }}" {% if resort.id == invoice.resort_name.id %} selected {% endif %}>{{ resort.resort_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3 checkin-date lable-ei">Checkin Date:</label>
+                            <div class="position-relative">
+                                <input type="date" name="checkin_date" class="form-control text-dark py-3 text-dark" value="{{ invoice.checkin_date }}" placeholder="dd-mm-yy" id="checkin_date" required>
+                                <i class=""></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3 lable-ei">Checkout Date :</label>
+                            <div class="position-relative">
+                                <input type="date" name="checkout_date" value="{{ invoice.checkout_date }}" class="form-control py-3 text-dark" placeholder="dd-mm-yy" id="checkout_date" required>
+                                <i class=""></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3">Mobile Number :</label>
+                    <input type="number" name="mobile" class="form-control py-3" placeholder="Enter Your Number" required>
+                </div> -->
+                <div class="row">
+                <div class="col-6">
+                <div class="d-flex flex-direction-row mt-4 gap-4">
+                    <label class="pt-3 lable-ei">Checkin Time :</label>
+                    <select name="checkin_time" class="form-select bg-light text-dark " required>
+                        <option value="10:00AM">10:00 AM</option>
+                        <option value="11:00AM">11:00 AM</option>
+                        <option value="12:00AM">12:00 AM</option>
+                        <option value="1:00PM">1:00 PM</option>
+                        <option value="2:00PM">2:00 PM</option>
+                        <option value="3:00PM">3:00 PM</option>
+                        <option value="4:00PM">4:00 PM</option>
+                        
+                      </select>
+                </div>
+                </div>
+                <div class="col-6">
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei">Checkout Time :</label>
+                    <select name="checkout_time" class="form-select bg-light text-dark " required >
+                        <option value="10:00AM">10:00 AM</option>
+                        <option value="11:00AM">11:00 AM</option>
+                        <option value="12:00AM">12:00 AM</option>
+                        <option value="1:00PM">1:00 PM</option>
+                        <option value="2:00PM">2:00 PM</option>
+                        <option value="3:00PM">3:00 PM</option>
+                        <option value="4:00PM">4:00 PM</option>
+                        
+                      </select>
+                </div>
+            </div>
+               </div>
+
+                <div class="d-flex justify-content-between" style="gap: 2.3rem;">
+                    <div class="d-flex flex-direction-row mt-4"style="gap: 2.3rem;">
+                        <label class="pt-3 lable-ei">Number of Pax :</label>
+                        <div class="d-flex flex-direction-row gap-4 ">
+                            <input type="number" name="adults" class="form-control py-3 px-3 text-center"placeholder="Adult" required>
+                            <p class="pt-3">and</p>
+                            <input type="number" name="children" class="form-control py-3 px-3 text-center"placeholder="Children">
+                        </div>
+                    </div>
+            
+                    <div class="d-flex flex-direction-row mt-4 gap-4">
+                        <label class="pt-3 lable-ei">Number of Nights : </label>
+                        <div class="d-flex flex-direction-row">
+                            <input type="text" name="number_of_nights" class="form-control py-3 px-3" id="number_of_nights" readonly>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="d-flex flex-direction-row gap-4 mt-4">
+                            <label class="pt-3 lable-ei">Room Type :</label>
+                            <input type="text" name="room_type" class="form-control py-3 px-3" >
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="d-flex flex-direction-row  mt-4 gap-4">
+                            <label class="pt-3 lable-ei">Number of Rooms:</label>
+                            <input type="number" name="number_of_rooms" class="form-control py-3 px-5" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei">Meal Plan :</label>
+                    <select class="form-select py-3 text-dark" name="meal_plan" aria-label="Default select example" required>
+                        <option selected>Select Meal</option>
+                        {% for meal in meals %}
+                                            <option value="{{ meal.id }}">{{ meal.meals }}</option>
+                                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+
+            <!-- Price Details--------------------------------->
+            <div class="mt-5">
+                <h5 class="pb-4 border-bottom border-grey text-uppercase">Price Details</h5>
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3 lable-ei">Bank Account :</label>
+                            <select class="form-select py-3 text-dark" name="bank_account" value="{{invoice.account}}" aria-label="Default select example" required>
+                                <option value="" selected disabled>Select Bank Account</option>
+                                {% for account in bank_accounts %}
+                                    <option value="{{ account.id }}">{{ account.account_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="d-flex flex-direction-row  mt-4 gap-4">
+                            <label class="pt-3 lable-ei">B To C:</label>
+                            <input type="text" name="package_price" class="form-control py-3" id="packageprice" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col-4 d-flex flex-direction-row gap-5">
+                        <label class="pt-3 lable-ei">B To B:</label>
+                        <input type="text" name="resort_price" id="rsrtprice" class="form-control py-3" required>
+                    </div>
+                    
+                    <div class="col-4 d-flex flex-direction-row gap-2">
+                        <label class="pt-3 lable-ei">Tax:</label>
+                        <select class="form-select py-3 text-dark" name="tax" id="tax" aria-label="Default select example" required>
+                            <option value="" selected disabled>Select Tax</option>
+                            <option value="12">12%</option>
+                            <option value="18">18%</option>
+                           
+                        </select>
+                    </div>
+                    <div class="col-4 d-flex flex-direction-row">
+                        <label class="pt-3"> Total:</label>
+                        <input type="text" name="total_amount" id="totalamount" class="form-control py-3 " readonly>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3 lable-ei">Advance Amount :</label>
+                            <input type="text" name="recieved_price" id="receivedprice" class="form-control py-3" required>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3">Travel :</label>
+                            <input type="text" name="travel" id="travel" class="form-control py-3" required>
+                        </div>
+                    </div> -->
+
+                    <div class="col-md-4">
+                        <div class="d-flex flex-direction-row  mt-4 gap-4">
+                            <label class="pt-3"style="width:300px">Balance Amount:</label>
+                            <input type="text" name="pending_price" id="pendingprice" class="form-control py-3" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3">TAC :</label>
+                            <input type="text" name="profit" id="profit-inp" class="form-control py-3" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row">
+                    <div class="col-md-7">
+                        <div class="d-flex flex-direction-row  mt-4">
+                            <label class="pt-3">TAC :</label>
+                            <input type="text" name="profit" id="profit-inp" class="form-control py-3" readonly>
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="col-md-5">
+                        <div class="d-flex flex-direction-row  mt-4 gap-4">
+                            <label class="pt-3"style="width:300px">Navigo:</label>
+                            <input type="text" name="navigo" id="Fnavigo" class="form-control py-3 px-5" readonly>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <button class="btn btn-primary px-4 py-2">Create Now</button>
+                </div>
+            </div>
+
+        </div>
+</div>
+</div>
+</form>
+</div>
+<script src="{%static 'js/Invoice.js'%}"></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

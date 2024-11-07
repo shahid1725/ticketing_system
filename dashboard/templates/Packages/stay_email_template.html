@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .header { background-color: #f8f9fa; padding: 10px; text-align: center; }
+        .content { margin-top: 20px; }
+        .footer { margin-top: 20px; text-align: center; font-size: 0.8em; color: #6c757d; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Stay Details</h2>
+        </div>
+        <div class="content">
+            {% if stay.stay_type %}<p><strong>Stay Type:</strong> {{ stay.stay_type }}</p>{% endif %}
+            {% if stay.location %}<p><strong>Location:</strong> {{ stay.location }}</p>{% endif %}
+            {% if stay.checkin_time %}<p><strong>Check-in Time:</strong> {{ stay.checkin_time }}</p>{% endif %}
+            {% if stay.checkout_time %}<p><strong>Check-out Time:</strong> {{ stay.checkout_time }}</p>{% endif %}
+            {% if stay.no_of_rooms %}<p><strong>Number of Rooms:</strong> {{ stay.no_of_rooms }}</p>{% endif %}
+            {% if stay.no_of_persons %}<p><strong>Number of Persons:</strong> {{ stay.no_of_persons }}</p>{% endif %}
+
+            {% if stay.price1 or stay.price2 or stay.price3 or stay.price4 %}
+            <h3>Room Types and Pricing</h3>
+            <table>
+                <tr>
+                    <th>Room Type</th>
+                    <th>Price</th>
+                </tr>
+                {% if stay.room_type1 and stay.price1 %}
+                <tr>
+                    <td>{{ stay.room_type1 }}</td>
+                    <td>{{ stay.price1 }}/-</td>
+                </tr>
+                {% endif %}
+                {% if stay.room_type2 and stay.price2 %}
+                <tr>
+                    <td>{{ stay.room_type2 }}</td>
+                    <td>{{ stay.price2 }}/-</td>
+                </tr>
+                {% endif %}
+                {% if stay.room_type3 and stay.price3 %}
+                <tr>
+                    <td>{{ stay.room_type3 }}</td>
+                    <td>{{ stay.price3 }}/-</td>
+                </tr>
+                {% endif %}
+                {% if stay.room_type4 and stay.price4 %}
+                <tr>
+                    <td>{{ stay.room_type4 }}</td>
+                    <td>{{ stay.price4 }}/-</td>
+                </tr>
+                {% endif %}
+            </table>
+            {% endif %}
+
+            {% if stay.amenities %}<p><strong>Amenities:</strong> {{ stay.amenities }}</p>{% endif %}
+            {% if stay_pdf_url %}
+                <p><strong>Stay PDF:</strong> <a href="{{ stay_pdf_url }}">Download PDF</a></p>
+            {% endif %}
+            
+        </div>
+        <div class="footer">
+            <p>Thank you for choosing our services!</p>
+        </div>
+    </div>
+</body>
+</html>

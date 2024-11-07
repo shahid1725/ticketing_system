@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{%block body_block%}
+
+<div class="customeredit">
+    <div class="d-flex justify-content-center">
+        {% for message in messages %}
+        <p class="alert alert-primary message custom-message px-3">{{ message }}</p>
+        {% endfor %}
+    </div>
+    <h5 class="pt-4 pb-4 border-bottom border-grey">Dashboard > Customers </h5>
+
+    <h5 class="text-uppercase pt-4 pb-4">Edit customer details</h5>
+
+    <form method="post" action="{% url 'customeredit' customer.id %}" >
+        {% csrf_token %}
+        <div class="customer-add">
+            <div class="py-2 d-flex flex-direction-row gap-5">
+                <p class="lable-ei">Customer Type :</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="customer_type" value="Business" {% if customer.customer_type == 'Business' %}checked{% endif %}  id="flexRadioDefault1" required>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Bussiness
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="customer_type" value="Individual" {% if customer.customer_type == 'Individual' %}checked{% endif %} id="flexRadioDefault2" required>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Individual
+                    </label>
+                </div>
+            </div>
+
+            <div class="customer-details">
+                <div class="mt-4 d-flex flex-direction-row gap-5">
+                    <label class="lable-ei">Primary contact:</label>
+                    <select class="form-select form-select-lg" style="width: 250px;" aria-label="Large select example" name="salutation">
+                        <option {% if customer.salutation == "Mr" %}selected{% endif %}>Mr</option>
+                        <option value="Mrs" {% if customer.salutation == "Mrs" %}selected{% endif %}>Mrs</option>
+                        <option value="Ms" {% if customer.salutation == "Ms" %}selected{% endif %}>Ms</option>
+                        <option value="Mrs" {% if customer.salutation == "Mrs" %}selected{% endif %}>Mrs</option>
+                    </select>
+                    <input type="text" class="form-control py-3" name="full_name" aria-label="First name"
+                        placeholder="Enter Your Full Name" value="{{ customer.full_name }}" required>
+                </div>
+
+                <div class="d-flex gap-5 mt-4 position-relative">
+                    <label class="pt-3 lable-ei">Customer Display Name:</label>
+                    <input type="text" class="form-control py-3" aria-label="First name" name="customer_display_name"
+                        placeholder="Enter Your Display Name" value="{{ customer.customer_display_name }}" required>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user position-absolute top-50 end-0 translate-middle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+                </div>
+
+                <div class="d-flex gap-5 mt-4 position-relative">
+                    <label  class="pt-3 lable-ei">Contact Number:</label>
+                    <input type="hidden" name="country_code_mobile" id="country_code_mobile" value="{{ customer.country_code_mobile }}">
+                    <input type="tel" class="form-control py-3" placeholder="Enter Your Number" name="contact_number"
+                           id="contact_number" value="{{ customer.contact_number }}" required>
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-phone position-absolute top-50 end-0 translate-middle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>            
+                </div>
+
+                <!-- Same as WhatsApp Checkbox -->
+            <div class="d-flex gap-5 mt-4">
+                <label class="pt-3">Same as WhatsApp Number:</label>
+                <input type="checkbox" id="same_as_whatsapp" name="same_as_whatsapp"
+                       {% if customer.contact_number == customer.whatsapp_number %}checked{% endif %}>
+            </div>
+
+            <!-- WhatsApp Number with Country Code -->
+            <div id="whatsapp-section">
+                <div class="d-flex gap-5 mt-4 position-relative">
+                    <label class="pt-3 lable-ei">WhatsApp Number :</label>
+                    <input type="hidden" name="country_code_whatsapp" id="country_code_whatsapp" value="{{ customer.country_code_whatsapp }}">
+                    <input type="tel" class="form-control py-3" placeholder="Enter WhatsApp Number" name="whatsapp_number"
+                           id="whatsapp_number" value="{{ customer.whatsapp_number|default_if_none:'' }}" required>
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-phone position-absolute top-50 end-0 translate-middle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>     
+                </div>
+            </div>
+
+                <div class="d-flex gap-5 mt-4 position-relative">
+                    <label class="pt-3 lable-ei">Customer Email :</label>
+                    <input type="email" class="form-control py-3" aria-label="First name"
+                        placeholder="Enter Your Email" name="customer_email" value="{{ customer.customer_email }}">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail position-absolute top-50 end-0 translate-middle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                </div>
+                <div class="d-flex justify-content-center mt-5 add-button">
+                    <button class="btn btn-primary ">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    const messages = document.querySelectorAll('.message');
+  
+  
+    messages.forEach(message => {
+      setTimeout(() => {
+        message.remove();
+      }, 2000);
+    });
+  
+  
+  
+  
+  </script>
+
+<!-- Include JS files at the end of body -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+<!-- Your JavaScript code -->
+<script>
+    // Existing message removal script
+    
+
+    // Country code and WhatsApp number handling
+    document.addEventListener("DOMContentLoaded", function() {
+        var intlTelInputOptions = {
+            initialCountry: "in",
+            preferredCountries: ["in"],
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            separateDialCode: true
+        };
+
+        // Initialize intlTelInput for Contact Number
+        var inputMobile = document.querySelector("#contact_number");
+        var countryCodeMobile = document.querySelector("#country_code_mobile");
+        var itiMobile = window.intlTelInput(inputMobile, intlTelInputOptions);
+
+        // Initialize intlTelInput for WhatsApp Number
+        var inputWhatsApp = document.querySelector("#whatsapp_number");
+        var countryCodeWhatsApp = document.querySelector("#country_code_whatsapp");
+        var itiWhatsApp = window.intlTelInput(inputWhatsApp, intlTelInputOptions);
+
+        // Set initial country based on saved country code
+        if (countryCodeMobile.value) {
+            var countryData = window.intlTelInputGlobals.getCountryData()
+                .find(country => country.dialCode === countryCodeMobile.value);
+            if (countryData) {
+                itiMobile.setCountry(countryData.iso2);
+            }
+        }
+
+        if (countryCodeWhatsApp.value) {
+            var countryData = window.intlTelInputGlobals.getCountryData()
+                .find(country => country.dialCode === countryCodeWhatsApp.value);
+            if (countryData) {
+                itiWhatsApp.setCountry(countryData.iso2);
+            }
+        }
+
+        // Handle "Same as WhatsApp" checkbox
+        var sameAsWhatsAppCheckbox = document.querySelector("#same_as_whatsapp");
+        var whatsappSection = document.querySelector("#whatsapp-section");
+
+        function updateWhatsAppNumber() {
+            if (sameAsWhatsAppCheckbox.checked) {
+                inputWhatsApp.value = inputMobile.value;
+                itiWhatsApp.setCountry(itiMobile.getSelectedCountryData().iso2);
+                countryCodeWhatsApp.value = itiMobile.getSelectedCountryData().dialCode;
+                whatsappSection.style.display = "none";
+            } else {
+                whatsappSection.style.display = "block";
+            }
+        }
+
+        sameAsWhatsAppCheckbox.addEventListener("change", updateWhatsAppNumber);
+
+        // Initial state
+        updateWhatsAppNumber();
+
+        // Update WhatsApp when mobile changes
+        inputMobile.addEventListener('input', function() {
+            if (sameAsWhatsAppCheckbox.checked) {
+                inputWhatsApp.value = inputMobile.value;
+            }
+        });
+
+        // Ensure country codes are set before submitting the form
+        document.querySelector('form').addEventListener('submit', function() {
+            countryCodeMobile.value = itiMobile.getSelectedCountryData().dialCode;
+            countryCodeWhatsApp.value = itiWhatsApp.getSelectedCountryData().dialCode;
+        });
+
+        // Set initial values for country codes if not already set
+        if (!countryCodeMobile.value) {
+            countryCodeMobile.value = itiMobile.getSelectedCountryData().dialCode;
+        }
+        if (!countryCodeWhatsApp.value) {
+            countryCodeWhatsApp.value = itiWhatsApp.getSelectedCountryData().dialCode;
+        }
+    });
+</script>
+{% endblock %}

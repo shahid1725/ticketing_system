@@ -1,0 +1,47 @@
+{% extends "employee_base.html" %}
+{%block body_block%}
+
+
+<div class="addresort">
+
+    <h5 class="pb-4 border-bottom border-grey">Sales > Bank Account</h5>
+    <h5 class="text-uppercase pt-4 pb-4">add account details</h5>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="resort-input">
+            <div class="d-flex flex-direction-row gap-4">
+                <label style="width:200px" class="pt-3">Account Name :</label>
+                <input type="text" name="account_name" class="form-control py-3" required>
+            </div>
+            <div class="d-flex flex-direction-row gap-4 mt-4">
+                <label style="width:200px" class="pt-3">Account Number :</label>
+                <input type="text" name="account_number" class="form-control py-3" required>
+            </div>
+            <div class="d-flex flex-direction-row gap-4 mt-4">
+                <label style="width:200px" class="pt-3">IFSC Code :</label>
+                <input type="text" name="ifsc_code" class="form-control py-3" required>
+            </div>
+            <div class="d-flex justify-content-center mt-4 add-button">
+                <button type="submit" class="btn btn-primary px-5 py-2">Submit</button>
+            </div>
+        </div>
+       
+    </form>
+</div>
+<script>
+
+    const messages = document.querySelectorAll('.message');
+  
+  
+    messages.forEach(message => {
+      setTimeout(() => {
+        message.remove();
+      }, 2000);
+    });
+  
+  
+  
+  
+  </script>
+{% endblock %}

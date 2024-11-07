@@ -1,0 +1,295 @@
+{% extends "employee_base.html" %}
+{%block body_block%}
+
+<div class="customerview">
+    <h5 class="p-4">Sales > Customers > #</h5>
+    <div class="d-flex justify-content-center">
+        {% for message in messages %}
+        <p class="alert alert-primary message custom-message px-3">{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="row p-4">
+        <div class="col-md-8">
+            <div class="bg-white rounded-4 p-4">
+                <div class="d-flex flex-direction-row justify-content-between border-bottom border-grey pb-2">
+                    <h5 class="text-uppercase ">Customer Details</h5>
+<!--                   <a href="" style="text-decoration: none;"><button class="border-0 bg-white d-flex flex-direction-row text-primary"><svg-->
+<!--                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"-->
+<!--                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
+<!--                            class="icon icon-tabler icons-tabler-outline icon-tabler-edit">-->
+<!--                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />-->
+<!--                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />-->
+<!--                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />-->
+<!--                            <path d="M16 5l3 3" />-->
+<!--                        </svg>-->
+<!--                        <p>Edit</p>-->
+<!--                    </button></a> -->
+                </div>
+                <div class="customer-details mt-3">
+                    <div class="d-flex flex-direction-row gap-4">
+                        <p>Customer Name :</p>
+                        <h6 class="text-uppercase">{{customer.full_name}}</h6>
+                    </div>
+                    <div class="d-flex flex-direction-row gap-4">
+                        <p>Customer Type :</p>
+                        <h6 class="text-uppercase">{{customer.customer_type}}</h6>
+                    </div>
+                    <div class="d-flex flex-direction-row gap-4">
+                        <p>Contact Number :</p>
+                        <h6 class="text-uppercase">+91{{customer.contact_number}}</h6>
+                    </div>
+                    <div class="d-flex flex-direction-row gap-4">
+                        <p>Customer Email :</p>
+                        <h6 class="text-uppercase">{{customer.customer_email}}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activities rounded-4 p-4 mt-4">
+                <h5 class="text-uppercase border-bottom border-grey py-4">activities</h5>
+                <div id="timeline-container">
+                    <div class="inner-container">
+                        <ul class="timeline">
+                            {% if combined_list %}
+                            {% for item in combined_list %}
+                            {% if item.invoice_number %}
+                            <li class="timeline-item">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" /></svg>
+                                <div class="timeline-div bg-white rounded-3 py-2 px-3">
+                                    <p class="mb-0 py-1" style="font-size: 0.8rem;">{{item.invoice_date}}</p>
+                                    <p class="text-capitalize fs-6 fw-medium mb-0 py-1">Payments received added</p>
+                                    <p class="mb-0 py-1" style="font-size: 0.8rem;">Payment of amount received and applied for
+                                        {{ item.invoice_number }}</p>
+                                </div>
+                            </li>
+                            {% else %}
+                            <li class="timeline-item">
+                                <div class="timeline-div bg-white rounded-3 p-2 px-3">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" /></svg>
+                                    <div class="timeline-div bg-white rounded-3 py-2 px-3">
+                                        <p class="mb-0 py-1" style="font-size: 0.8rem;">{{ item.voucher_date }}</p>
+                                        <p class="text-capitalize fs-6 fw-medium mb-0 py-1">Payments received added</p>
+                                        <p class="mb-0 py-1" style="font-size: 0.8rem;">Payment of amount received and applied for
+                                            {{ item.voucher_number }}</p>
+                                    </div>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <p>No data found</p>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg-white rounded-4 p-4">
+                <h5 class="text-uppercase border-bottom border-bottom border-grey pb-4">Receivable</h5>
+
+                <div class="row mt-3 customer-details">
+                    <div class="col-md-7">
+                        <p>Total Billed Amount</p>
+                        <p>Paid Amount</p>
+                        <p>Due</p>
+                        <p>Due Date</p>
+                    </div>
+                    <div class="col-md-1">
+                        <p> : </p>
+                        <p> : </p>
+                        <p> : </p>
+                        <p> : </p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>Rs: {{ total_billed_amount|default:"0.00" }}/-</p>
+                        <p>Rs: {{ paid_amount|default:"0.00" }}/-</p>
+                        <p>Rs: {{ pending_amount|default:"0.00" }}/-</p>
+                        <p>{{ latest_due_date|default:"N/A" }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bg-white rounded-4 p-4 mt-4 ">
+              <h5 class="text-uppercase border-bottom border-grey py-4">Booking History</h5>
+              <div class="booking-history">
+                {% if latest_invoice_and_voucher.latest_invoice %}
+                <div class="text-start border-3 border-start border-primary py-2 px-3 mt-4">
+                    <p class="fw-bold fs-6 text-uppercase">{{ latest_invoice_and_voucher.latest_invoice.resort_name }}</p>
+                    <p class="fw-medium">{{ latest_invoice_and_voucher.latest_invoice.checkin_date }}</p>
+                    <p>{{ latest_invoice_and_voucher.latest_invoice.invoice_number }}</p>
+                    <div class="d-flex flex-direction-row gap-3 booking-button">
+                        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ latest_invoice_and_voucher.latest_invoice.id }}" class="text-danger px-4 py-1 text-center border-0 rounded-3 border-top border-start">Cancel</button>
+                        <a href="{% url 'employee_postpone_invoice' latest_invoice_and_voucher.latest_invoice.id %}">
+                            <button class="text-primary px-4 py-1 text-center border-0 rounded-3 border-top border-start">Postpone</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal fade" id="staticBackdrop{{ latest_invoice_and_voucher.latest_invoice.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border-0 pb-1">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center fw-medium mb-0">
+                                    Are you sure you want to Cancel this Invoice?
+                                </p>
+                            </div>
+                            <div class="modal-footer border-0 py-2 justify-content-center">
+                                <form method="post" action="{% url 'employee_cancelinvoice' latest_invoice_and_voucher.latest_invoice.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="customer_id" value="{{ customer.id }}">
+                                    <button type="button" class="btn btn-secondary fs-7" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger fs-7">Yes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if latest_invoice_and_voucher.latest_voucher %}
+            <div class="text-start border-3 border-start border-primary py-2 px-3 mt-4">
+                <p class="fw-bold fs-6 text-uppercase">{{ latest_invoice_and_voucher.latest_voucher.resort_name }}</p>
+                <p class="fw-medium">{{ latest_invoice_and_voucher.latest_voucher.checkin_date }}</p>
+                <p>{{ latest_invoice_and_voucher.latest_voucher.voucher_number }}</p>
+                <div class="d-flex flex-direction-row gap-3 booking-button">
+                    <!-- Cancel Button Triggering Modal -->
+                    <button data-bs-toggle="modal" data-bs-target="#staticBackdropv{{ latest_invoice_and_voucher.latest_voucher.id }}" class="text-danger px-4 py-1 text-center border-0 rounded-3 border-top border-start">Cancel</button>
+                    <!-- Postpone Button -->
+                    <a href="{% url 'employee_postpone_voucher' latest_invoice_and_voucher.latest_voucher.id %}">
+                        <button class="text-primary px-4 py-1 text-center border-0 rounded-3 border-top border-start">Postpone</button>
+                    </a>
+                </div>
+            </div>
+        
+            <!-- Modal for Voucher Cancellation Confirmation -->
+            <div class="modal fade" id="staticBackdropv{{ latest_invoice_and_voucher.latest_voucher.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header border-0 pb-1">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center fw-medium mb-0">
+                                Are you sure you want to Cancel this Voucher?
+                            </p>
+                        </div>
+                        <div class="modal-footer border-0 py-2 justify-content-center">
+                            <form method="post" action="{% url 'employee_cancelvoucher' latest_invoice_and_voucher.latest_voucher.id %}">
+                                {% csrf_token %}
+                                <button type="button" class="btn btn-secondary fs-7" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger fs-7">Yes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if latest_invoice_and_voucher.latest_trip_invoice %}
+        <div class="text-start border-3 border-start border-primary  py-2 px-3 mt-4">
+            <p class="fw-bold fs-6 text-uppercase">{{ latest_invoice_and_voucher.latest_trip_invoice.destination }}</p>
+            <p class="fw-medium">{{ latest_invoice_and_voucher.latest_trip_invoice.start_date }}</p>
+            <p>{{ latest_invoice_and_voucher.latest_trip_invoice.invoice_number }}</p>
+            <div class="d-flex flex-direction-row gap-3 booking-button">
+                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ latest_invoice_and_voucher.latest_trip_invoice.id }}" class="text-danger px-4 py-1 text-center border-0 rounded-3 border-top border-start">Cancel</button>
+                <a href="{% url 'employee_postpone_trip_invoice' latest_invoice_and_voucher.latest_trip_invoice.id %}">
+                    <button class="text-primary px-4 py-1 text-center border-0 rounded-3 border-top border-start">Postpone</button>
+                </a>
+            </div>
+        </div>
+        <div class="modal fade" id="staticBackdrop{{ latest_invoice_and_voucher.latest_trip_invoice.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header border-0 pb-1">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center fw-medium mb-0">
+                            Are you sure you want to Cancel this Trip Invoice?
+                        </p>
+                    </div>
+                    <div class="modal-footer border-0 py-2 justify-content-center">
+                        <form method="post" action="{% url 'employee_cancel_trip_invoice' latest_invoice_and_voucher.latest_trip_invoice.id %}">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-secondary fs-7" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger fs-7">Yes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if latest_invoice_and_voucher.latest_trip_voucher %}
+<div class="text-start border-3 border-start border-primary py-2 px-3 mt-4">
+  <p class="fw-bold fs-6 text-uppercase">{{ latest_invoice_and_voucher.latest_trip_voucher.destination }}</p>
+  <p class="fw-medium">{{ latest_invoice_and_voucher.latest_trip_voucher.start_date }}</p>
+  <p>{{ latest_invoice_and_voucher.latest_trip_voucher.voucher_number }}</p>
+  <div class="d-flex flex-direction-row gap-3 booking-button">
+      {% if messages %}
+          {% for message in messages %}
+              {% if message.tags == 'success' %}
+                  <button class="text-secondary px-4 py-1 text-center border-0 rounded-3 border-top border-start" disabled>Cancelled</button>
+              {% else %}
+                  <!-- Button to trigger modal -->
+                  <button data-bs-toggle="modal" data-bs-target="#staticBackdrops{{ latest_invoice_and_voucher.latest_trip_voucher.id }}" class="text-danger px-4 py-1 text-center border-0 rounded-3 border-top border-start">Cancel</button>
+              {% endif %}
+          {% endfor %}
+      {% else %}
+          <!-- Button to trigger modal -->
+          <button data-bs-toggle="modal" data-bs-target="#staticBackdrops{{ latest_invoice_and_voucher.latest_trip_voucher.id }}" class="text-danger px-4 py-1 text-center border-0 rounded-3 border-top border-start">Cancel</button>
+      {% endif %}
+      <a href="{% url 'employee_postpone_trip_voucher' latest_invoice_and_voucher.latest_trip_voucher.id %}">
+          <button class="text-primary px-4 py-1 text-center border-0 rounded-3 border-top border-start">Postpone</button>
+      </a>
+  </div>
+</div>
+
+<!-- Modal for Cancelling the Trip Voucher -->
+<div class="modal fade" id="staticBackdrops{{ latest_invoice_and_voucher.latest_trip_voucher.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header border-0 pb-1">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p class="text-center fw-medium mb-0">
+                  Are you sure you want to Cancel this Trip Voucher?
+              </p>
+          </div>
+          <div class="modal-footer border-0 py-2 justify-content-center">
+              <form method="post" action="{% url 'employee_cancel_trip_voucher' latest_invoice_and_voucher.latest_trip_voucher.id %}">
+                  {% csrf_token %}
+                  <button type="button" class="btn btn-secondary fs-7" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger fs-7">Yes, Cancel</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endif %}
+
+
+              </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    const messages = document.querySelectorAll('.message');
+  
+  
+    messages.forEach(message => {
+      setTimeout(() => {
+        message.remove();
+      }, 2000);
+    });
+  
+  
+  
+  
+  </script>
+{% endblock %}

@@ -1,0 +1,401 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --poppins: "Poppins", sans-serif;
+  --off-white: #F8FAFB;
+  --white: #ffffff;
+  --blue: #1147FF;
+  --green: #31BD2B;
+  --light-blue: #cbe3fc;
+  --light-green: #DAFFE8;
+  --red: #FF0000;
+  --pastel-red: #FFDEDA;
+  --pastel-orange: #FFF3DB;
+  --pastel-purple: #F0D9FF;
+  --pastel-green: #C2F5C8;
+}
+
+.sale-table input {
+  background-color: #F1F1F1;
+}
+
+.sale-table .table {
+  width: 100%;
+  --bs-table-bg: var(--off-white) !important;
+  border-color: #dee2e6 !important;
+}
+
+.sale-table .table th {
+  font-weight: 400 !important;
+  color: var(--gray) !important;
+  text-align: start;
+  padding: 1rem 1rem !important;
+}
+
+.sale-table .table td {
+  font-weight: 400 !important;
+  color: black;
+  text-transform: uppercase;
+  text-align: start;
+  padding: 1rem 1rem !important;
+}
+
+.sale-table td a {
+  padding: 5px 15px;
+  border-radius: 5rem;
+  margin-right: 0.8rem;
+  border: none;
+  font-size: 0.8rem;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.sale-table td a:nth-child(1) {
+  color: var(--blue);
+  background-color: var(--light-blue);
+}
+
+.sale-table td a:nth-child(2) {
+  color: var(--green);
+  background-color: var(--light-green);
+}
+
+.sale-table td a:nth-child(3) {
+  color: var(--red);
+  background-color: var(--pastel-red);
+}
+
+.sale-table td a:nth-child(3):hover {
+  color: var(--red);
+  background-color: var(--pastel-red);
+}
+
+.view {
+  color: var(--blue);
+}
+
+.edit {
+  color: var(--green);
+}
+
+.pagination button:hover {
+  background-color: white;
+  color: blue;
+}
+
+.add-button button{
+  background-color: var(--blue) !important;
+}
+
+/* #customeredit------------------ */
+.customer-details label {
+  width: 350px;
+}
+
+.customeredit button {
+  padding: 10px 40px;
+}
+
+.customer-add {
+  padding-right: 20rem;
+}
+
+.customer-details input,
+.customer-details select {
+  background-color: var(--off-white) !important;
+}
+
+.view-btn {
+  background-color: white !important;
+  border: 1px var(--blue) solid !important;
+}
+
+.resort-details input {
+  background-color: var(--off-white) !important;
+
+}
+
+.resort-input {
+  padding-right: 20rem;
+}
+
+.resort-input input {
+  background-color: var(--off-white) !important;
+}
+
+.resort-input i {
+  color: rgb(122, 120, 120);
+  font-size: 1.3rem;
+}
+
+.addinvoice input,
+.addinvoice select {
+  background-color: var(--off-white) !important;
+}
+
+.add-invoice {
+  padding-right: 25rem;
+}
+
+.add-invoice label {
+  width: 200px;
+  white-space: nowrap;
+}
+
+.invoice-number {
+  width: 175px !important;
+}
+
+.checkin-date {
+  width: 168px !important;
+}
+
+.invoice-date {
+  width: 165px !important;
+}
+
+.voucher-details {
+  padding-right: 25rem;
+}
+
+.voucher-details label {
+  width: 200px;
+  white-space: nowrap;
+}
+
+.voucher-details input,
+.voucher-details select {
+  background-color: var(--off-white) !important;
+}
+
+.customer-details p {
+  width: 150px;
+  font-size: 0.9rem;
+}
+
+.customer-details h6 {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.activities {
+  background-color: #EAEFFE;
+}
+
+/* timeline---------------------- */
+
+.timeline {
+  margin: 0 auto;
+  position: relative;
+  left: 10px;
+  max-width: 900px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.timeline::-webkit-scrollbar {
+  width: 10px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 2px solid blue;
+}
+
+.booking-button button {
+  font-size: 0.8rem;
+}
+
+.timeline-item {
+  color: #0a0909;
+  font-family: var(--font-family-2);
+  text-align: start;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  border-left: 2px solid rgb(167, 164, 164);
+  position: relative;
+  list-style-type: none;
+  --item-width: calc(100%);
+  position: relative;
+}
+
+.timeline-div {
+  background-color: white;
+}
+
+.timeline-item::after {
+  content: attr(data-date);
+  position: absolute;
+  right: calc(var(--item-width) + 40px);
+  top: 16px;
+  float: right;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.timeline-item::before {
+  content: "";
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: blue;
+  position: absolute;
+  left: -15px;
+  top: 57px;
+}
+
+.timeline-item svg {
+  position: absolute;
+  top: 62px;
+  left: -10px;
+  color: #ebecff;
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+/* ------------------------------------------- */
+.booking-history {
+  height: 450px;
+  overflow-y: auto;
+}
+
+.booking-history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.booking-history::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid blue;
+}
+
+.booking-button button {
+  font-size: 0.8rem;
+}
+
+.voucher-checkin-date {
+  width: 147px !important;
+}
+
+.voucher-number {
+  width: 165px !important;
+}
+
+.voucher-date {
+  width: 140px !important;
+}
+
+.invoice-buttons button {
+  border: none;
+  padding: 5px 15px;
+  margin-right: 0.5rem;
+  border-radius: 0.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.invoice-buttons button:nth-child(1) {
+  background-color: var(--pastel-green);
+  color: var(--green);
+}
+
+.invoice-buttons button:nth-child(2) {
+  background-color: var(--pastel-orange);
+  color: orange;
+}
+
+.invoice-buttons button:nth-child(3) {
+  background-color: var(--light-blue);
+  color: blue;
+}
+
+.invoice-buttons button:nth-child(4) {
+  background-color: var(--pastel-purple);
+  color: purple;
+}
+
+.invoice-buttons button:nth-child(5) {
+  background-color: var(--pastel-red);
+  color: var(--red);
+}
+
+.invoice-details {
+  max-width: 80%;
+  margin: auto;
+}
+
+.view-details {
+  background-color: #324969;
+}
+
+.invoice-address p {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.invoice-content {
+  height: 80rem;
+  background-color: white;
+  box-shadow: 0px -1px 3px 1px rgb(204, 200, 200);
+}
+
+.view-billing {
+  padding: 4rem 5.8rem;
+}
+.invoice-table {
+  border: 1px solid black !important;
+}
+.invoice-table td {
+  text-transform: uppercase;
+  text-align: center;
+}
+.invoice-payment label {
+   width: 150px;
+   text-align: end;
+}
+
+.invoice-content ul li {
+  font-size: 1rem; 
+  padding-top: 0.8rem;
+}
+/* responsive----------------------------------- */
+@media (max-width: 1800px) {
+  .add-invoice {
+    padding-right: 10rem;
+  }
+
+  .checkin-date {
+    width: 193px !important;
+  }
+
+  .invoice-number {
+    width: 166px !important;
+  }
+
+  /* .invoice-date {
+    width: 200px !important;
+  } */
+
+  .voucher-details {
+    padding-right: 10rem;
+  }
+
+  .voucher-checkin-date {
+    width: 160px !important;
+  }
+
+  .voucher-number {
+    width: 160px !important;
+  }
+
+  .voucher-date {
+    width: 165px !important;
+  }
+}

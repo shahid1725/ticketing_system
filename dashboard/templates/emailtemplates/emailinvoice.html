@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+</head>
+<body>
+    
+    <p>{{ message }}</p>
+    <p>You can view the details by clicking the following link: <a href="{{ viewcolor_link }}">{{ viewcolor_link }}</a></p>
+    
+    <div style="padding:1rem;margin: 1rem; background-color: #fff;max-width: 800px;margin-left: auto;margin-right:auto;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="esiContent">
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td>
+                                <h3 style="font-size: 14px; font-weight: bold; color: black; margin: 0;">ROOM BLOCKED IN THE NAME OF</h3>
+                                <p style="margin: 0; text-transform: uppercase;">{{invoices.customer.salutation}}.{{invoices.customer.customer_display_name}}</p>
+                                <p>+91 {{invoices.customer.contact_number}}</p>
+                                
+                            </td>
+                            <!-- <td style="padding-left: 20px;">
+                                <h3 class="fs-6 fw-bold yellow">FROM:</h3>
+                                <p class="no-m">WHYTE HOUSE HOLIDAYS</p>
+                                <p class="no-m">MTC Building, Kaithapoil P.o</p>
+                                <p class="no-m">Calicut, 673586</p>
+                                <p class="no-m">GSTIN: 32AAEFW2307GlZL</p>
+                            </td> -->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="table esintable" style="margin-top: 20px;">
+                        <thead style="background-color: #f8f9fa;">
+                            <tr style="border: 1px solid gray;">
+                                <th style="text-align: center; font-weight: normal; color: #343a40; padding: 8px;">HOTEL NAME</th>
+                                <th style="text-align: center; font-weight: normal; color: #343a40; text-transform: uppercase; padding: 8px;">{{invoices.resort_name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">CHECK IN</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.checkin_date|date:"d-F-Y"}}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">CHECK OUT</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.checkout_date|date:"d-F-Y"}}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">NO. OF PAX</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.adults}} ADULTS  {{invoices.children}} Children</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">ROOM TYPE</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.room_type}}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">NO OF ROOMS</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.number_of_rooms}}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">NO.OF NIGHTS</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.number_of_nights}}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;border: 1px solid gray;">MEAL PLAN</td>
+                                <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{invoices.meal_plan}}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid gray;">Resort Location</td>
+                                <td colspan="3" style="padding: 8px; text-align: center; border: 1px solid gray;">
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ invoices.resort_name.resort_location }}" target="_blank">
+                                        Click to see location
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 20px;">
+                        <tr>
+                            <td style="text-align: right;">
+                                
+                                <p class="no-m">Collect From Guest <span class="ms-4"> Rs. {{invoices.pending_price}}/-</span></p>
+                                <p class="no-m">Advance Recieved <span class="ms-4"> Rs. {{invoices.recieved_price}}/-</span></p>
+                                <p class="no-m">Total Amount <span class="ms-4"> Rs. {{invoices.total_amount}}/-</span></p>
+                                <!-- <p class="no-m">From Navigo <span class="ms-4"> Rs. {{invoices.navigo}}/-</span></p> -->
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 1rem;">
+            <tr>
+                <td style="width: 50%;">
+                    <!-- Left-aligned table -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td>
+                                <h5 class="yellow" style="margin-top: 15px; margin-bottom: 5px;">CONTACT INFORMATION</h5>
+                                <p style="margin-bottom: 0;"></p>
+                                <p style="margin-bottom: 0;"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 50%;" align="right">
+                    <!-- Right-aligned table -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td align="right">
+                                <p class="yellow" style="margin-bottom: 5px;">HANDLED BY</p>
+                                <p>{{ invoices.sales_person.username }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <p class="text-light" style="margin-bottom: 0;"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

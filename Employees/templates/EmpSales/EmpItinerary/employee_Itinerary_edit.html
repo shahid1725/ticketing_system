@@ -1,0 +1,342 @@
+{% extends "employee_base.html" %}
+{% load static %}
+{%block body_block%}
+<style>
+    label {
+        width: 165px;
+        text-wrap: nowrap;
+    }
+</style>
+<div class="itinerary_add">
+    <h5 class="pb-4 border-bottom border-grey">Sales > Itinerary</h5>
+    <h5 class="text-uppercase pt-4 pb-4">Edit itinerary details</h5>
+    <div style="padding-right: 10rem;">
+    <form method="post" action="{% url 'employee_edititinerary' itinerary.id %}">
+        {% csrf_token %}
+
+            <div class="d-flex  pt-4">
+                <div class="mb-4 align-self-center">
+                    <label for="" class="lable-ei" style="width: 162px;">Customer name</label>
+                </div>
+                <div class=" mb-4 position-relative flex-grow-1">
+                <div class="position-relative">
+                    <input type="hidden" name="customer_id" id="customer_id" value="{{ itinerary.customer.id }}"/>
+                    <input class="form-control py-3" placeholder="Start typing..." type="search" value="{{ itinerary.customer.full_name }}"
+                           name="customer_name" id="searchInput" autocomplete="off" required/>
+                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search position-absolute top-50 end-0 translate-middle-y"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+                </div>
+                <ul id="suggestions" style="display: none;">
+                    {% for customer in customers %}
+                    <li class="suggestion" data-id="{{ customer.id }}"><span>{{ customer.full_name }}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+                </div>
+
+            <div class="d-flex flex-direction-row mt-4">
+                <label class="pt-3 lable-ei invoice-number">Itinerary Number :</label>
+                <input type="text" name="itinerary_number" class="form-control py-3 px-5 rounded-3 border border-primary" style="width: 200px;" value="{{ itinerary.itinerary_number }}" readonly>
+            </div>
+
+            <div class="d-flex  gap-5">
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei invoice-date">Itinerary Date :</label>
+                    <div class="position-relative">
+                        <input type="date" class="form-control py-3 text-dark" name="itinerary_date" placeholder="dd-mm-yy" value="{{ itinerary.itinerary_date|date:'Y-m-d' }}" required>
+                        <i class=""></i>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-direction-row mt-4 flex-nowrap w-100">
+                    <label class="pt-3 lable-ei" style="white-space: nowrap;">Sales Person :</label>
+                    <select class="form-select py-3 text-dark" name="sales_person" aria-label="Default select example" required>
+                        <option selected>Select Sales Person</option>
+                        {% for user in sales_persons %}
+                            <option value="{{ user.id }}" {% if user.id == itinerary.sales_person.id %} selected {% endif %}>{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h5 class="pb-4 border-bottom border-grey text-uppercase mb-5">Itinerary Contents</h5>
+        <div>
+
+                <div class="d-flex gap-2 position-relative">
+                    <label class="lable-ei align-self-center" for="roomTypeInput">Destination:</label>
+                    <input required
+                      type="text"
+                      name="destination"
+                      id="r"
+                      class="form-control py-3"
+                      placeholder="Type Destination Name Here"
+                      value="{{ itinerary.destination }}"
+                    />
+                  </div>
+                  
+                  <!-- {% for place in itinerary.get_visiting_places %} -->
+                  <!-- <div class="d-flex gap-2 position-relative mt-4 new-input align-items-center"> -->
+                      <!-- <label>Visiting place {{ forloop.counter }}:</label> -->
+                      <!-- <input type="text" class="form-control py-3" placeholder="" name="visiting_place{{ forloop.counter }}" value="{{ place }}"> -->
+                  <!-- </div> -->
+                  <!-- {% endfor %} -->
+
+                  <!-- Container for dynamically added input fields -->
+                  <!-- <div id="dynamic-visiting-places-container"> -->
+                      <!-- This will be populated dynamically -->
+                  <!-- </div> -->
+
+                  <!-- Add Input Button -->
+                  <!-- <div class="d-flex gap-2 position-relative mt-4" id="input-container" style="width: 90%;"> -->
+                      <!-- <label class="lable-ei align-self-center" for="roomTypeInput">Visiting Places:</label> -->
+                      <!-- <svg xmlns="http://www.w3.org/2000/svg" id="addInputIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus position-absolute top-50 translate-middle" style="right: -3rem; cursor: pointer"> -->
+                          <!-- <path stroke="none" d="M0 0h24v24H0z" fill="none" /> -->
+                          <!-- <path d="M12 5l0 14" /> -->
+                          <!-- <path d="M5 12l14 0" /> -->
+                      <!-- </svg> -->
+                  <!-- </div> -->
+
+
+
+                  <!-- Add additional visiting places here -->
+
+                  <!-- Existing visiting places -->
+                  {% with total_places=itinerary.get_visiting_places|length %}
+                  {% for place in itinerary.get_visiting_places %}
+                  <div class="d-flex gap-2 position-relative mt-4 new-input align-items-center">
+                      <label>Visiting place {{ forloop.counter }}:</label>
+                      <input type="text" class="form-control py-3" placeholder="" name="visiting_place{{ forloop.counter }}" value="{{ place }}">
+                  </div>
+                  {% endfor %}
+                  <!-- Container for dynamically added input fields -->
+                  <div id="dynamic-visiting-places-container-edit">
+                      <!-- This will be populated dynamically -->
+                  </div>
+                  <!-- Add Input Button -->
+                  {% if total_places < 10 %}
+                  <div class="d-flex gap-2 position-relative mt-4" id="input-container-edit" style="width: 90%;">
+                      <label class="lable-ei align-self-center" for="roomTypeInput">Add Visiting Places:</label>
+                      <svg xmlns="http://www.w3.org/2000/svg" id="addInputIconEdit" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus position-absolute top-50 translate-middle" style="right: -3rem; cursor: pointer">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M12 5l0 14" />
+                          <path d="M5 12l14 0" />
+                      </svg>
+                  </div>
+                  {% endif %}
+                  {% endwith %}
+
+                  <div class="d-flex  gap-5 mt-4">
+                    <div class="d-flex flex-direction-row  gap-4 mt-4">
+                        <label class="pt-3 lable-ei invoice-date">No of Days  :</label>
+                        <input type="text" class="form-control py-3 text-dark" name="number_of_days" value="{{ itinerary.number_of_days }}" required>
+                    </div>
+
+                    <div class="d-flex flex-direction-row mt-4">
+                        <label class="pt-3 lable-ei invoice-date">No of Nights  :</label>
+                        <input type="text" class="form-control py-3 text-dark" name="number_of_nights" value="{{ itinerary.number_of_nights }}" required>
+                    </div>
+                   </div>
+
+            <div class="d-flex justify-content-between mt-3" style="gap: 2.3rem;">
+                <div class="d-flex flex-direction-row mt-4"style="gap: 1.4rem;">
+                    <label class="pt-3 lable-ei">Number of Pax :</label>
+                    <div class="d-flex flex-direction-row gap-4 ">
+                        <input type="number" name="adults" class="form-control py-3 px-3 text-center" placeholder="Adult" value="{{ itinerary.adults }}" required>
+                        <p class="pt-3">and</p>
+                        <input type="number" name="children" class="form-control py-3 px-3 text-center" placeholder="Children" value="{{ itinerary.children }}">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-direction-row gap-3 mt-4 flex-nowrap w-100">
+                    <label class="pt-3 lable-ei" >Transportation Mode :</label>
+                    <select class="form-select py-3 text-dark" name="transportation_mode" aria-label="Default select example" required>
+                        <option value="" selected disabled>Select </option>
+                        {% for choice in transportation_choices %}
+                        <option value="{{ choice.0 }}" {% if choice.0 == itinerary.transportation_mode %} selected {% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+
+            </div>
+            <div class="d-flex  gap-5 mt-4">
+                <div class="d-flex flex-direction-row mt-4 gap-4">
+                    <label class="pt-3 lable-ei invoice-date">Vehicle Type :</label>
+                    <select class="form-select py-3 text-dark" name="vehicle_type" aria-label="Default select example" required>
+                        <option value="" selected disabled>Select vehicle</option>
+                        {% for choice in vehicle_choices %}
+                        <option value="{{ choice.0 }}" {% if choice.0 == itinerary.vehicle_type %} selected {% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei invoice-date">Guide  :</label>
+                    <select class="form-select py-3 text-dark" name="guide_type" aria-label="Default select example" required>
+                        <option value="" selected disabled>Select </option>
+                        {% for choice in guide_choices %}
+                        <option value="{{ choice.0 }}" {% if choice.0 == itinerary.guide_type %} selected {% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+               </div>
+               <div class="d-flex  gap-5 mt-4">
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei invoice-date">Pick Up Location  :</label>
+                    <input type="text" class="form-control py-3 text-dark" name="pick_up_location" value="{{ itinerary.pick_up_location }}" required>
+                </div>
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei invoice-date">PickUp Date  :</label>
+                    <input type="datetime-local" class="form-control py-3 text-dark" name="start_date" value="{{ itinerary.start_date|date:'Y-m-d\\TH:i' }}" required>
+                </div>
+            </div>
+            <div class="d-flex  gap-5 mt-4">
+
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei invoice-date">Drop Location  :</label>
+                    <input type="text" class="form-control py-3 text-dark" name="drop_location" value="{{ itinerary.drop_location }}" required>
+                </div>
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei invoice-date">Drop Date  :</label>
+                    <input type="datetime-local" class="form-control py-3 text-dark" name="end_date" value="{{ itinerary.end_date|date:'Y-m-d\\TH:i' }}" required>
+                </div>
+            </div>
+               <div class="d-flex  gap-5 mt-4">
+                <div class="d-flex flex-direction-row gap-3 mt-4 w-50">
+                    <label class="pt-3 invoice-date"> Accommodation  :</label>
+                    <input type="text" class="form-control py-3 text-dark" name="accommodation" value="{{ itinerary.accommodation }}">
+                </div>
+
+                <div class="d-flex flex-direction-row mt-4">
+                    <label class="pt-3 lable-ei ">No of Rooms  :</label>
+                    <input type="text" class="form-control py-3 text-dark" name="number_of_rooms" value="{{ itinerary.number_of_rooms }}" required>
+                </div>
+               </div>
+
+               <div >
+                <h5 class="fw-semibold fs-6 mt-4">Meal plans : </h5>
+                <div class="d-flex gap-3 align-items-center mt-4">
+                    <label for="" class="me-5">Breakfast</label>
+                    <input type="text" class="form-control py-3" name="breakfast" value="{{ itinerary.breakfast }}">
+                    <label for="">lunch</label>
+                    <input type="text" class="form-control py-3" name="lunch" value="{{ itinerary.lunch }}">
+                    <label for="">Dinner</label>
+                    <input type="text" class="form-control py-3" name="dinner" value="{{ itinerary.dinner }}">
+                </div>
+               </div>
+
+
+
+               <!-- {% for activity in itinerary.get_extra_activities %} -->
+    <!-- <div class="d-flex gap-2 position-relative mt-4 anew-input align-items-center"> -->
+        <!-- <label>Activity {{ forloop.counter }}:</label> -->
+        <!-- <input type="text" class="form-control py-3" placeholder="Enter the activities" name="extra_activities{{ forloop.counter }}" value="{{ activity }}"> -->
+    <!-- </div> -->
+    <!-- {% endfor %} -->
+<!--  -->
+    <!-- Container for dynamically added input fields -->
+    <!-- <div id="dynamic-extra-activities-container"> -->
+        <!-- This will be populated dynamically -->
+    <!-- </div> -->
+<!--  -->
+    <!-- Add Input Button -->
+    <!-- <div class="d-flex gap-2 position-relative mt-4" id="input-container2" style="width: 90%;"> -->
+        <!-- <label class="lable-ei align-self-center" for="">Extra Activities:</label> -->
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" id="addInputIcon2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus position-absolute top-50 translate-middle" style="right: -3rem; cursor: pointer"> -->
+            <!-- <path stroke="none" d="M0 0h24v24H0z" fill="none" /> -->
+            <!-- <path d="M12 5l0 14" /> -->
+            <!-- <path d="M5 12l14 0" /> -->
+        <!-- </svg> -->
+    <!-- </div> -->
+
+
+
+              <!-- Add additional extra activities here -->
+              {% with total_activities=itinerary.get_extra_activities|length %}
+              {% for activity in itinerary.get_extra_activities %}
+              <div class="d-flex gap-2 position-relative mt-4 anew-input align-items-center">
+                  <label>Activity {{ forloop.counter }}:</label>
+                  <input type="text" class="form-control py-3" placeholder="Enter the activities"
+                      name="extra_activities{{ forloop.counter }}" value="{{ activity }}">
+              </div>
+              {% endfor %}
+              <!-- Container for dynamically added input fields -->
+              <div id="dynamic-extra-activities-container-edit">
+                  <!-- This will be populated dynamically -->
+              </div>
+              <!-- Add Input Button -->
+              {% if total_activities < 5 %}
+              <div class="d-flex gap-2 position-relative mt-4" id="input-container2-edit" style="width: 90%;">
+                  <label class="align-self-center" for="">Add Extra Activities:</label>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="addInputIcon2Edit" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-plus position-absolute top-50 translate-middle"
+                      style="right: -3rem; cursor: pointer">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 5l0 14" />
+                      <path d="M5 12l14 0" />
+                  </svg>
+              </div>
+              {% endif %}
+              {% endwith %}
+
+               <div>
+                <h5 class="fw-semibold fs-6 mt-4">Package Mode : </h5>
+                <div id="single-expense">
+                    <div class="d-flex flex-direction-row gap-5 mt-4 w-50">
+                        <label class="pt-3 fw-semibold lable-ei">Total:</label>
+                        <input type="text" class="form-control py-3 text-dark" name="total" id="total-input" value="{{ itinerary.total|default_if_none:'' }}" placeholder="">
+                    </div>
+                </div>
+                <div class="form-check mt-4">
+                    <input class="form-check-input" type="checkbox" name="is_per_head" value="on" id="flexCheckDefault" {% if itinerary.is_per_head %}checked{% endif %}>
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Per Head
+                    </label>
+                </div>
+                <div id="split-expenses" style="display: {% if itinerary.is_per_head %}block{% else %}none{% endif %};">
+                    <div class="d-flex gap-5 mt-1">
+                        <div class="d-flex flex-direction-row mt-4">
+                            <label class="pt-3 lable-ei">Expense Per Person:</label>
+                            <input type="text" class="form-control py-3 text-dark" name="expense_per_person" placeholder="" id="expense-person" value="{{ itinerary.expense_per_person|default_if_none:'' }}">
+                        </div>
+                        <div class="d-flex flex-direction-row mt-4">
+                            <label class="pt-3 lable-ei">Person Count:</label>
+                            <input type="text" class="form-control py-3 text-dark" name="person_count" placeholder="" id="person-count" value="{{ itinerary.person_count|default_if_none:'' }}">
+                        </div>
+                    </div>
+                    <div class="d-flex gap-5 mt-1">
+                        <div class="d-flex flex-direction-row mt-4">
+                            <label class="pt-3 lable-ei">Expense Per Child:</label>
+                            <input type="text" class="form-control py-3 text-dark" name="expense_per_child" placeholder="" id="expense-child" value="{{ itinerary.expense_per_child|default_if_none:'' }}">
+                        </div>
+                        <div class="d-flex flex-direction-row mt-4">
+                            <label class="pt-3 lable-ei">Child Count:</label>
+                            <input type="text" class="form-control py-3 text-dark" name="child_count" placeholder="" id="child-count" value="{{ itinerary.child_count|default_if_none:'' }}">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-direction-row gap-5 mt-4 w-50">
+                        <label class="pt-3 fw-semibold lable-ei">Total Expense per head:</label>
+                        <input type="text" class="form-control py-3 text-dark" name="total_expense" placeholder="" id="total-expense" value="{{ itinerary.total_expense|default_if_none:'' }}" readonly>
+                    </div>
+                </div>
+            </div>
+
+        <div class="d-flex justify-content-center mt-5">
+            <button type="submit" class="theme-btn px-4 py-2 rounded">UPDATE ITINERARY</button>
+        </div>
+
+
+        </div>
+
+
+
+    </form>
+    </div>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="{% static 'js/Itinerary.js' %}"></script>
+
+{% endblock %}

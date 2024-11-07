@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{%block body_block%}
+{% load static %}
+<style>
+    .upload-product-images{
+  margin-top:1rem;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:1rem
+}
+
+.upload-product-images>.product-img-box{
+  border:1px gray dashed;
+  border-radius:1rem;
+  position:relative;
+  width:9rem;
+  height:9rem;
+  cursor:pointer;
+}
+
+.product-img-input{
+  min-width:0;
+  width:100%;
+  /* visibility: hidden; */
+  height:100%;
+  color:transparent;
+  cursor:pointer;
+  position:relative;
+  z-index:5
+}
+
+.product-img-input::file-selector-button{
+  border:none;
+  color:transparent;
+  background-color:transparent;
+}
+
+.product-img-preview{
+  width:7rem;
+  height:7rem;
+  object-fit:cover;
+  position:absolute;
+  border-radius:.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:1
+}
+</style>
+
+
+<div class="customeredit">
+    <h5 class="pt-4 pb-4 border-bottom border-grey">Dashboard > Settings </h5>
+
+   <form>
+        <div class="customer-add">
+           <div class="d-flex gap-4 mt-3 mb-4">
+            <label class="lable-ei" style="white-space: nowrap;align-self: center;">Title Name : </label>
+            <input type="text" class="form-control" />
+           </div>
+
+           <div class="d-flex gap-4">
+           <div class="mt-3">
+            <div class="mt-3">
+                <label class="lable-ei" for="image1"> favIcon <span style="font-size: 0.6rem;">(only png files)</span></label>
+                <div class="upload-product-images">
+                    <div class="product-img-box">
+                        <input type="file" name="image1" id="image1" multiple class="product-img-input"
+                               required>
+                        <img src="{%static 'assets/addimage.png'%}" alt=""
+                             class="product-img-preview">
+                    </div>
+
+                </div>
+            </div>
+
+           </div>
+
+
+           <div class="mt-3">
+            <div class="mt-3">
+                <label class="lable-ei" for="image1"> Logo <span style="font-size: 0.6rem;">(only png files)</span></label>
+                <div class="upload-product-images">
+                    <div class="product-img-box">
+                        <input type="file" name="image1" id="image1" multiple class="product-img-input"
+                               required>
+                        <img src="{%static 'assets/addimage.png'%}" alt=""
+                             class="product-img-preview">
+                    </div>
+
+                </div>
+            </div>
+
+           </div>
+        </div>
+
+           <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary mt-4">Submit</button>
+           </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+<script>
+     const productImgInputs = document.querySelectorAll('.product-img-input');
+const productImgPreviews = document.querySelectorAll('.product-img-preview');
+
+productImgInputs.forEach(input => {
+  input.addEventListener('change', (event) => {
+    const selectedFile = event.target.files[0];
+    const preview = input.nextElementSibling; // Get the corresponding preview image
+
+    // Use FileReader to preview the image
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      preview.src = event.target.result;
+    };
+    reader.readAsDataURL(selectedFile);
+  });
+});
+</script>
+{% endblock %}

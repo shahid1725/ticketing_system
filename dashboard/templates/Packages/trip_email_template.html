@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .header { background-color: #f8f9fa; padding: 10px; text-align: center; }
+        .content { margin-top: 20px; }
+        .footer { margin-top: 20px; text-align: center; font-size: 0.8em; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Trip Details</h2>
+        </div>
+        <div class="content">
+            {% if trip.place_name %}<p><strong>Place:</strong> {{ trip.place_name }}</p>{% endif %}
+            <!-- {% if trip.created_at %}<p><strong>Date:</strong> {{ trip.created_at }}</p>{% endif %} -->
+            {% if trip.price %}<p><strong>Price:</strong> {{ trip.price }}/-</p>{% endif %}
+            {% if trip.no_of_days %}<p><strong>Number of Days:</strong> {{ trip.no_of_days }}</p>{% endif %}
+            {% if trip_pdf_url %}
+                <p><strong>Trip PDF:</strong> <a href="{{ trip_pdf_url }}">Download PDF</a></p>
+            {% endif %}
+           
+        </div>
+        <div class="footer">
+            <p>Thank you for choosing our services!</p>
+        </div>
+    </div>
+</body>
+</html>

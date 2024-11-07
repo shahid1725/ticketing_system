@@ -1,0 +1,134 @@
+
+{% extends "base.html" %}
+
+{% block body_block %}
+<div class="leadsreport pt-4">
+    <h1 class="fh-1">Lead Report</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row pe-0 from-to">
+        
+            
+                <div class="col-4">
+                    <label for="" class="lable-ei me-3">Report Type</label>
+                    <input type="text" value="Lead" class="form-control w-50 d-inline text-center bg-light" readonly>
+                </div>
+                <div class="col-4">
+                    <label for="start_date" class=" label-ei  me-3">From:</label>
+                    <input type="date" name="start_date" class="form-control w-50 d-inline text-center bg-light"
+                        value="{{ start_date }}">
+                </div>
+            <div class="col-4">
+                <label for="end_date" class=" label-ei  me-3">to:</label>
+                <input type="date" name="end_date" class="form-control w-75 d-inline text-center bg-light"
+                       value="{{ end_date }}">
+            </div>
+            <div class="col-12 mt-3 pe-md-5">
+                
+                <div class="d-flex justify-content-between gap-2">
+                    <select name="report_type" id="report_type" class="form-select ls-slct py-2" style="width: 15%;">
+                        <option value="leads">Leads Report</option>
+                        <option value="sales">Sales Report</option>
+                        <option value="voucher">Voucher Report</option>
+                    </select>
+                <div>
+                    <button class=" theme-btn rounded px-3 py-2" type="submit">Search</button>
+                    <button class=" theme-btn rounded px-3 py-2" type="submit" name="export_excel" value="true">Export to Excel</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+    <div class="pt-5">
+        {% if leads_data %}
+        <div class="border border-secondary-subtle rounded-3 mt-4">
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th scope="col" >#</th>
+                        <th scope="col" >Full Name</th>
+                        
+                        <th scope="col" >Email</th>
+                        <th scope="col" >Mobile Number</th>
+                        
+                        <th scope="col" >Lead Date</th>
+                        <th scope="col" >Tag</th>
+                        <th scope="col" >Attended By</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lead in leads_data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ lead.full_name }}</td>
+                        
+                        <td>{{ lead.email }}</td>
+                        <td>{{ lead.mobile }}</td>
+                        
+                        <td>{{ lead.lead_date|date:"d-M-Y" }}</td>
+                        <td>{{ lead.tag.name }}</td>
+                        <td class="fw-semibold text-uppercase">
+    
+                            {% for attendee in lead.attendees.all %}
+                            {{ attendee.username }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+        
+                        </td>
+                      
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="px-5 py-5 fw-semibold text-center fs-5">No leads found.</p>
+        {% endif %}
+
+    </div>
+</div>
+<script>
+    document.getElementById('report_type').addEventListener('change', function() {
+    var selectedValue = this.value;
+    console.log("Selected Value:", selectedValue); // Check if this logs the correct value
+
+    if (selectedValue === 'sales') {
+        window.location.href = '/report'; // Replace with the correct URL for the sales report
+    } else if (selectedValue === 'leads') {
+        window.location.href = '/leadsreport'; // Replace with the correct URL for the leads report
+    } else if (selectedValue === 'voucher') {
+        window.location.href = '/voucherreport'; // Replace with the correct URL for the voucher report
+    }
+});
+
+// After page load, set the selected option based on the current URL path
+document.addEventListener('DOMContentLoaded', function() {
+    var currentPath = window.location.pathname;
+    if (currentPath === '/report') {
+        document.getElementById('report_type').value = 'sales';
+    } else if (currentPath === '/leadsreport') {
+        document.getElementById('report_type').value = 'leads';
+    } else if (currentPath === '/voucherreport') {
+        document.getElementById('report_type').value = 'voucher';
+    }
+});
+
+
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

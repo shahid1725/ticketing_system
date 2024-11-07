@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{%block body_block%}
+
+<div class="accountdetails">
+    <div class="sale-table">
+
+        <div class="d-flex justify-content-center">
+            {% for message in messages %}
+            <p class="alert alert-primary message custom-message px-3">{{ message }}</p>
+            {% endfor %}
+        </div>
+
+        <div style="display: flex;justify-content: space-between;">
+            <h5 class="py-4">Sales > Guide</h5>
+            <div class="pt-4 add-button">
+                <a href="{% url 'employee_guide_add' %}"><button class="btn btn-primary px-4 w-100">+ Add
+                        Guide</button></a>
+            </div>
+        </div>
+
+        <div class="rounded-3 overflow-auto border border-grey mt-1">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Number</th>
+                        <th scope="col">Guide Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if guide %}
+                    {%for i in guide %}
+                    <tr>
+                        <td scope="row" class="text-center">{{ forloop.counter }}</td>
+                        <td>{{i.guide_name}}</td>
+                        <td>
+
+                            <a class="delete-btn" style="color:red;background-color:#ffdeda" type="button"
+                                data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ i.id }}">Delete</a>
+                            <!-- modal -->
+                            <div class="modal fade" id="staticBackdrop{{ i.id }}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-0 pb-1">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-center fw-medium mb-0">
+                                                Are you sure you want to delete this guide name !
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer border-0 py-2 justify-content-center">
+                                            <button type="button" class="btn btn-secondary fs-7"
+                                                data-bs-dismiss="modal">Close</button>
+                                                <a href="{% url 'guide_delete' i.id %}">
+                                            <button type="button" class="btn btn-danger fs-7">Yes</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="11" class="text-center p-4">No data found</td>
+                </tr>
+            {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        {% if account.has_previous %}
+        <a href="?page=1" class="pagination-btn">< First</a>
+        <a href="?page={{ account.previous_page_number }}" class="pagination-btn">< Previous</a>
+        {% endif %}
+
+        {% if account.has_next %}
+        <a href="?page={{ account.next_page_number }}" class="pagination-btn">Next ></a>
+        <a href="?page={{ account.paginator.num_pages }}" class="pagination-btn">Last ></a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+
+  const messages = document.querySelectorAll('.message');
+
+
+  messages.forEach(message => {
+    setTimeout(() => {
+      message.remove();
+    }, 2000);
+  });
+</script>
+
+{% endblock %}

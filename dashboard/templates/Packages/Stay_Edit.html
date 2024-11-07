@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{%load static%}
+ {%block body_block%}
+
+
+
+<div class="packages">
+  <h1>Dashboard > Packages > Edit Stay</h1>
+  <div class="border-top border-1">
+    <h2 class="fs-5 py-4">EDIT STAY DETAILS</h2>
+    <form method="post" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="grid-two-c">
+        <div class="d-flex gap-5">
+          <label class="lable-ei" for="">Stay Type:</label>
+          <select required name="stay_type" id="" class="form-select text-dark">
+            <option value="" disabled>Select stay type</option>
+            <option value="Pool Villa" {% if stay.stay_type == "Pool Villa" %}selected{% endif %}>Pool Villa</option>
+            <option value="Resort" {% if stay.stay_type == "Resort" %}selected{% endif %}>Resort</option>
+            <option value="Homestay" {% if stay.stay_type == "Homestay" %}selected{% endif %}>Homestay</option>
+            <option value="Tent" {% if stay.stay_type == "Tent" %}selected{% endif %}>Tent</option>
+          </select>
+        </div>
+        <div class="d-flex gap-5 position-relative">
+          <label class="lable-ei" for="">Enter Number of rooms:</label>
+          <input required
+            type="number"
+            name="no_of_rooms" value="{{stay.no_of_rooms}}"
+            id=""
+            class="form-control"
+            placeholder="Enter no of rooms"
+          />
+        </div>
+      </div>
+        <div id="roomTypesContainer">
+          {% for room in room_data %}
+              <div class="room-inputs {% if not room.room_type and not room.price %}hidden{% endif %}" data-index="{{ room.index }}">
+                  <div class="mt-4 grid-two-c">
+                <div class="d-flex gap-5">
+                      <label class="lable-ei" for="">Room Type {{ room.index }}:</label>
+                      <input
+                          type="text"
+                          name="room_type{{ room.index }}"
+                          value="{{ room.room_type|default_if_none:'' }}"
+                          class="form-control"
+                          placeholder="Enter Room Type {{ room.index }}"
+                      />
+                  </div>
+                  <div class="d-flex gap-5 mt-2">
+                      <label class="lable-ei" for="">Price {{ room.index }}:</label>
+                      <div class="input-group">
+                          <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-currency-rupee">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                              <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6" />
+                              <path d="M7 9l11 0" />
+                            </svg>
+                          </span>
+                          <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Enter Price {{ room.index }}"
+                              name="price{{ room.index }}"
+                              value="{{ room.price|default_if_none:'' }}"
+                              aria-label="Price"
+                          />
+                      </div>
+                  </div>
+                </div>
+              </div>
+          {% endfor %}
+          <div id="dynamic-room-types-container-edit">
+              <!-- This will be populated dynamically -->
+          </div>
+          {% if room_data|length < 16 %}
+          <div class="d-flex gap-2 position-relative mt-4 mb-4" id="input-container-edit" style="width: 70%;">
+              <label class="lable-ei align-self-center" for="roomTypeInput">Add Room Type:</label>
+              <svg xmlns="http://www.w3.org/2000/svg" id="addInputIconEdit" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-plus position-absolute top-50 translate-middle" style="right: -3rem; cursor: pointer">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 5v14" />
+                  <path d="M5 12h14" />
+              </svg>
+          </div>
+          {% endif %}
+      </div>
+
+      <div class="grid-two-c">
+        <div class="d-flex gap-5 position-relative">
+          <label class="lable-ei" for="">Location:</label>
+          <input required
+            type="text"
+            name="location" value="{{stay.location}}"
+            id=""
+            class="form-control"
+            placeholder="Enter Location"
+          />
+        </div>
+        <div class="d-flex gap-5">
+          <label class="lable-ei" for="">Capacity:</label>
+          <input required
+            type="number"
+            name="no_of_persons" value="{{stay.no_of_persons}}"
+            id=""
+            class="form-control"
+            placeholder=""
+          />
+        </div>
+        <div class="d-flex gap-5">
+          <label class="lable-ei" for="">Checkin time:</label>
+          <input required
+            type="time"
+            name="checkin_time" value="{{stay.checkin_time|time:'H:i'}}"
+            id=""
+            class="form-control"
+            placeholder=""
+          />
+        </div>
+        <div class="d-flex gap-5">
+          <label class="lable-ei" for="">Checkout time:</label>
+          <input required
+            type="time"
+            name="checkout_time" value="{{stay.checkout_time|time:'H:i'}}"
+            id=""
+            class="form-control"
+            placeholder=""
+          />
+        </div>
+        <div class="d-flex gap-5 position-relative align-items-center">
+          <label for="">Amenitis:</label>
+          <input
+            type="text"
+            name="amenities" value="{{stay.amenities}}"
+            id=""
+            class="form-control"
+            placeholder=""
+
+          />
+          <!-- <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="addAmenityBtn"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-plus position-absolute top-50 end-0 translate-middle cursor-pointer"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg> -->
+        </div>
+
+        <div class="d-flex gap-5 position-relative">
+          <label class="" for="">Attach PDF:</label>
+          <div class="file-upload w-100 mt-3">
+            <div class="file-select rounded py-1">
+              <div class="file-select-button" id="fileName">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-folder"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"
+                  />
+                </svg>
+              </div>
+              <div class="file-select-name" id="noFile">
+                {% if stay.stay_pdf %}
+                {{ stay.stay_pdf.name }}
+                {% else %}
+                No file uploaded
+                {% endif %}
+              </div>
+              <input type="file" name="stay_pdf" value="" id="chooseFile" accept="application/pdf"/>
+            </div>
+            <p class="file-upload-note text-danger">( only upload pdf or docx files )</p>
+
+          </div>
+        </div>
+        
+        <div id="amenitiesDropdown" class="amenities-container">
+          <span data-value="Wifi">Wifi</span>
+          <span data-value="Parking">Parking</span>
+          <span data-value="Gym">Gym</span>
+          <span data-value="pool">pool</span>
+          <button id="closeBtn" type="button" class="btn">close x</button>
+        </div>
+        <div class="d-flex gap-5">
+          <label>Property Name</label>
+          <input type="text" name="resort_name" value="{{stay.resort_name}}" class="form-control bg-transparent" placeholder="Property Name" />
+        </div>
+        <div class="d-flex gap-5">
+          <label>Property email</label>
+          <input type="text" name="resort_email" value="{{stay.resort_email}}" class="form-control bg-transparent" placeholder="Property email" />
+        </div>
+        <div class="d-flex gap-5">
+          <label>Property contact</label>
+          <input type="text" name="resort_mobile" value="{{stay.resort_mobile}}" class="form-control bg-transparent" placeholder="Property contact"  />
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="my-3 form-check">
+            <input type="checkbox" name="is_own_resort" class="form-check-input border border-2"  style="grid-column: span 2;padding-block: 0rem !important;"  id="exampleCheck1" {% if stay.is_own_resort %}checked{% endif %}>
+            <label class="form-check-label" for="exampleCheck1">Own Resort</label>
+          </div>
+    </div>
+  </div>
+        <div
+          class="d-flex justify-content-center mt-3"
+          style="grid-column: span 2"
+        >
+          <button type="submit" class="theme-btn px-5 py-2 rounded mt-3">
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{%static 'js/Stay.js'%}"></script>
+<script>
+  document.getElementById("chooseFile").addEventListener("change", function () {
+    var filename = this.value;
+    if (/^\s*$/.test(filename)) {
+      document.querySelector(".file-upload").classList.remove("active");
+      document.getElementById("noFile").textContent = "No file chosen...";
+    } else {
+      document.querySelector(".file-upload").classList.add("active");
+      document.getElementById("noFile").textContent = filename.replace(
+        "C:\\fakepath\\",
+        ""
+      );
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let counter = document.querySelectorAll(".room-inputs").length;
+    const maxInputs = 16;
+
+    // Hide empty input containers initially
+    document.querySelectorAll('.room-inputs.hidden').forEach(element => {
+        element.style.display = 'none';
+    });
+
+    document.getElementById('addInputIconEdit').addEventListener('click', () => {
+        if (counter >= maxInputs) {
+            alert("You have reached the maximum number of inputs.");
+            return;
+        }
+
+        // Show the next hidden input
+        const nextHiddenInput = document.querySelector('.room-inputs.hidden');
+        if (nextHiddenInput) {
+            nextHiddenInput.classList.remove('hidden');
+            nextHiddenInput.style.display = 'flex';
+            nextHiddenInput.style.marginTop = '10px';
+            nextHiddenInput.style.paddingRight = '10px';
+
+
+            counter++;
+        }
+
+        // If we've reached the maximum inputs, hide the add button
+        if (counter >= maxInputs) {
+            document.getElementById('input-container-edit').style.display = 'none';
+        }
+    });
+});
+
+</script>
+{%endblock%}

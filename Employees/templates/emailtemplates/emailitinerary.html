@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Details</title>
+</head>
+<body>
+    <p>{{ message }}</p>
+    <p>You can view the details by clicking the following link: <a href="{{ itinerary_link }}">{{ itinerary_link }}</a></p>
+
+    <div style="padding:1rem;margin: 1rem; background-color: #fff;max-width: 800px;margin-left: auto;margin-right:auto;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+
+        <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+            <tr>
+                <td style="width: 50%; vertical-align: top;">
+                    <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                        <tr>
+                            <td style="padding-bottom: 10px;">
+                                <h3 style="font-size: 14px; font-weight: bold; color: black; margin: 0;">ITINERARY DETAILS FOR:</h3>
+                                <p style="margin: 0; text-transform: uppercase;">{{ itinerary.customer.salutation }}. {{ itinerary.customer.customer_display_name }}</p>
+                                <p>+91 {{ itinerary.customer.contact_number }}</p>
+                                <p>Email: {{ itinerary.customer.customer_email }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <table cellpadding="0" cellspacing="0" border="0" class="table esintable" style="width: 100%; border-collapse: collapse; margin-top: 2rem;border: 1px solid gray;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="text-align: center; font-weight: normal; color: #343a40; padding: 8px;">DESTINATION</th>
+                    <th style="text-align: center; font-weight: normal; color: #343a40; text-transform: uppercase; padding: 8px;">{{ itinerary.destination }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">ITINERARY NUMBER</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.itinerary_number }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">ITINERARY DATE</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.itinerary_date|date:"d-F-Y " }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">NUMBER OF DAYS</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.number_of_days }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">NUMBER OF NIGHTS</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.number_of_nights }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">ADULTS</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.adults }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">CHILDREN</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.children }}</td>
+                </tr>
+                <!-- <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">TRANSPORTATION MODE</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.transportation_mode }}</td>
+                </tr> -->
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">VEHICLE TYPE</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.vehicle_type }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">GUIDE</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.guide_type }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">ACCOMMODATION</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ itinerary.accommodation }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">EXTRA ACTIVITIES</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">
+                        {{ itinerary.extra_activities1 }}<br>
+                        
+                    </td>
+                </tr>
+                {% if itinerary.is_per_head %}
+    {% if itinerary.expense_per_person %}
+    <tr>
+        <td style="padding: 8px;border: 1px solid gray;">Expense/person</td>
+        <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">₹ {{itinerary.expense_per_person }}</td>
+    </tr>
+    {% endif %}
+    {% if itinerary.expense_per_child %}
+    <tr>
+        <td style="padding: 8px;border: 1px solid gray;">Expense/child</td>
+        <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">₹ {{itinerary.expense_per_child }}</td>
+    </tr>
+    {% endif %}
+    {% if itinerary.total_expense %}
+    <tr>
+        <td style="padding: 8px;border: 1px solid gray;"><strong>Total Expense</strong></td>
+        <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;"><strong>₹{{ itinerary.total_expense}}</strong></td>
+    </tr>
+    {% endif %}
+{% else %}
+    {% if itinerary.total %}
+    <tr>
+        <td style="padding: 8px;border: 1px solid gray;"><strong>Total</strong></td>
+        <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;"><strong>₹{{ itinerary.total}}</strong></td>
+    </tr>
+    {% endif %}
+{% endif %}
+            </tbody>
+        </table>
+        
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td align="right">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="text-align: right;">
+                        <!-- <tr>
+                            <td>
+                                <p style="margin-bottom: 0;">Expense per Person <span style="margin-left: 20px;"> Rs. {{ itinerary.expense_per_person }}/-</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="margin-bottom: 0;">Expense per Child <span style="margin-left: 20px;"> Rs. {{ itinerary.expense_per_child }}/-</span></p>
+                            </td>
+                        </tr> -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

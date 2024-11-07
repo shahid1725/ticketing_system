@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>voucer</title>
+</head>
+<body>
+    
+    <p>{{ message }}</p>
+    <p>You can view the details by clicking the following link: <a href="{{ viewcolor_link }}">{{ viewcolor_link }}</a></p>
+    
+    <div style="padding:1rem;margin: 1rem; background-color: #fff;max-width: 800px;margin-left: auto;margin-right:auto;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+
+   
+        <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+            <tr>
+                <td style="width: 50%; vertical-align: top;">
+                    <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                        <tr>
+                            <td style="padding-bottom: 10px;">
+                                <h3 style="font-size: 14px; font-weight: bold; color: black; margin: 0;">ROOM BLOCKED IN THE NAME OF:</h3>
+                                <p style="margin: 0; text-transform: uppercase;">{{ tripvoucher.customer.salutation }}. {{ tripvoucher.customer.customer_display_name }}</p>
+                                <p >+91 {{ tripvoucher.customer.contact_number }}</p>
+                                <!-- <p >GST: {{ voucher.customer.gst_number }}</p> -->
+                            </td>
+                              <!-- <td style="padding-left: 20px;">
+                                <h3 class="fs-6 fw-bold yellow">FROM:</h3>
+                                <p class="no-m">WHYTE HOUSE HOLIDAYS</p>
+                                <p class="no-m">MTC Building, Kaithapoil P.o</p>
+                                <p class="no-m">Calicut, 673586</p>
+                                <p class="no-m">GSTIN: 32AAEFW2307GlZL</p>
+                            </td> -->
+                        </tr>
+                      
+                    </table>
+                </td>
+                
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" class="table esintable" style="width: 100%; border-collapse: collapse; margin-top: 2rem;border: 1px solid gray;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="text-align: center; font-weight: normal; color: #343a40; padding: 8px;">Destination</th>
+                    <th style="text-align: center; font-weight: normal; color: #343a40; text-transform: uppercase; padding: 8px;">{{ tripvoucher.destination.place_name }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">Start Date</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ tripvoucher.start_date|date:"d-F-Y " }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">End Date</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ tripvoucher.end_date|date:"d-F-Y " }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">NO. OF PAX</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ tripvoucher.adults }} ADULTS {{ tripvoucher.children }} Children</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">Destination</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;" class="text-uppercase">{{ tripvoucher.destination.place_name }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">Pickup Location</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ tripvoucher.Pickup_location }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">Drop Location</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;">{{ tripvoucher.drop_location }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;border: 1px solid gray;">MEAL PLAN</td>
+                    <td colspan="3" style="padding: 8px;text-align: center;border: 1px solid gray;" class="text-uppercase">{{ tripvoucher.meal_plan }}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <!-- <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td width="50%">
+                    <p style="margin-bottom: 1px;">Voucher Date : {{ voucher.voucher_date|date:"d-F-Y" }}</p>
+                </td>
+                <td width="50%" align="right">
+                    <p style="margin-bottom: 1px;">Price <span style="margin-left: 20px;"> Rs. {{ voucher.total_amount }}/-</span></p>
+                    <p style="margin-bottom: 0;">Advanced Received <span style="margin-left: 20px;"> Rs. {{ voucher.received_price }}/-</span></p>
+                </td>
+            </tr>
+        </table> -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td align="right">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="text-align: right;">
+                        <tr>
+                            <td>
+                                <p style="margin-bottom: 0;">Package Price <span style="margin-left: 20px;"> Rs. {{ tripvoucher.package_price }}/-</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="margin-bottom: 0;">Recieved Price <span style="margin-left: 20px;"> Rs. {{ tripvoucher.recieved_price }}/-</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="margin-bottom: 0;">Accomodation Price <span style="margin-left: 20px;"> Rs. {{ tripvoucher.accomadation_price }}/-</span></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 1rem;">
+            <tr>
+                <td style="width: 50%;">
+                    <!-- Left-aligned table -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td>
+                                <h5 class="yellow" style="margin-top: 15px; margin-bottom: 5px;">CONTACT INFORMATION</h5>
+                                <p style="margin-bottom: 0;"></p>
+                                <p style="margin-bottom: 0;"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 50%;" align="right">
+                    <!-- Right-aligned table -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td align="right">
+                                <p class="yellow" style="margin-bottom: 5px;">HANDLED BY</p>
+                                <p>{{ tripvoucher.sales_person.username }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <p class="text-light" style="margin-bottom: 0;"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        
+       
+        
+        
+        
+    </div>
+</body>
+</html>
