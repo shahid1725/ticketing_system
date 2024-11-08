@@ -83,294 +83,79 @@ transform: rotate(360deg);
   </head>
   <body>
     <div class="d-flex align-content-stretch flex-wrap" style="height: 100%">
-      <aside class="app-sidebar">
-        <div class="p-4">
-          <a href="{%url 'index'%}">
-            <img src="{%static 'assets/televate-01.png'%}"  alt="" class="brand-logo" />
-          </a>
-          <div class="py-3">
-            <ul class="sidebar-item text-decoration-none">
-              <li>
-                <a href="{%url 'index'%}" class="nav-active"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-home"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                  </svg>
-                  Dashboard
-                </a>
-              </li>
-              <li style="background-color: transparent">
-                <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button
-                        class="accordion-button collapsed px-2 py-2 text-primary rounded"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="false"
-                        aria-controls="collapseOne"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-tag"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path
-                            d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
-                          />
-                          <path
-                            d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z"
-                          />
-                        </svg>
-                        Sales
-                      </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse">
-                      <div class="accordion-body">
-                        <ul class="list-unstyled acd-list">
-                          <li>
-                            <a href="{%url 'customerlist'%}"> Customers </a>
-                          </li>
-                          <!-- <li><a href="{%url 'resortlist'%}"> Resorts </a></li>
-                          <li><a href="{%url 'guide_list' %}">Guide</a></li> -->
-                          <!-- <li>
-                            <a href="{%url 'ownresortlist'%}">Own Resorts</a>
-                          </li> -->
-                          <li>
-                            <a href="{%url 'accountdetails'%}"
-                              >Acccount Details</a
-                            >
-                          </li>
-                          <li>
-                            <a href="{%url 'listitinerary'%}">Itinerary</a>
-                          </li>
-                          <li><a href="{%url 'meallist'%}">Meal Plans</a></li>
-                          <!-- <li><a href="{%url 'saleinvoice'%}">Invoice</a></li> -->
-                          <li style="background-color: transparent" class="py-0">
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                  <button
-                                    class="accordion-button collapsed ps-0 py-2 text-primary rounded fs-7"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOnet"
-                                    aria-expanded="false"
-                                    aria-controls="collapseOne"
-                                  >
-                                    Trip
-                                  </button>
-                                </h2>
-                                <div id="collapseOnet" class="accordion-collapse collapse">
-                                  <div class="accordion-body pb-0">
-                                    <ul class=" acd-list" style="list-style: disc;color: #0d6efd;">
-                                        <li><a href="{%url 'tripinvoice'%}">Invoice</a></li>
-                                        <li><a href="{%url 'tripvoucher'%}">Voucher</a></li>
-                                    </ul>
-                                    </div>
-                                    </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li style="background-color: transparent" class="py-0">
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                  <button
-                                    class="accordion-button collapsed ps-0 py-2 text-primary rounded fs-7"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOnes"
-                                    aria-expanded="false"
-                                    aria-controls="collapseOne"
-                                  >
-                                    Stay
-                                  </button>
-                                </h2>
-                                <div id="collapseOnes" class="accordion-collapse collapse">
-                                  <div class="accordion-body pb-0">
-                                    <ul class=" acd-list" style="list-style: disc;color: #0d6efd;">
-                                        <li><a href="{%url 'saleinvoice'%}">Invoice</a></li>
-                                        <li><a href="{%url 'salevoucher'%}">Voucher</a></li>
-                                    </ul>
-                                    </div>
-                                    </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a href="{%url 'leadlist'%}" class="nav-active">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-message"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M8 9h8" />
-                    <path d="M8 13h6" />
-                    <path
-                      d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"
-                    />
-                  </svg>
-                  Lead
-                </a>
-              </li>
-              <li>
-                <a href="{%url 'employeelist'%}" class="nav-active">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-users"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-                  </svg>
-                  Employee
-                </a>
-              </li>
-              <li>
-                <a href="{%url 'report'%}" class="nav-active">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-folder"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"
-                    />
-                  </svg>
-                  Report
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'profit_report' %}">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-text"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 12h6" /><path d="M9 16h6" /></svg>
-                  Profit Report</a>
-              </li>
-              <li>
-                <a href="{%url 'packages'%}" class="nav-active">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-package"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                    <path d="M12 12l8 -4.5" />
-                    <path d="M12 12l0 9" />
-                    <path d="M12 12l-8 -4.5" />
-                    <path d="M16 5.25l-8 4.5" />
-                  </svg>
-                  Packages
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'addscript' %}" class="nav-active">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-script"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 20h-11a3 3 0 0 1 0 -6h11a3 3 0 0 0 0 6h1a3 3 0 0 0 3 -3v-11a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v8" /></svg>
-                  Script
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'addtag' %}" class="nav-active">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bookmarks"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10v11l-5 -3l-5 3v-11a3 3 0 0 1 3 -3h4a3 3 0 0 1 3 3z" /><path d="M11 3h5a3 3 0 0 1 3 3v11" /></svg>
-                  Tag
-                </a>
-              </li>
+     <aside class="app-sidebar">
+      <div class="p-4">
+        <a href="{%url 'index'%}">
+          <img src="{%static 'assets/ticket.jpg'%}" alt="" class="brand-logo" />
+        </a>
+        <div class="py-3">
+          <ul class="sidebar-item text-decoration-none">
+            <li>
+              <a href="{%url 'index'%}" class="nav-active"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-home">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                </svg>
+                Dashboard
+              </a>
+            </li>
+
+            <li>
+              <a href="{%url 'ticketlist'%}" class="nav-active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-message">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M8 9h8" />
+                  <path d="M8 13h6" />
+                  <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
+                </svg>
+                Tickets
+              </a>
+            </li>
+            <li>
+              <a href="{%url 'employeelist'%}" class="nav-active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                  <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                </svg>
+                Employee
+              </a>
+            </li>
 
               <li>
-                <a href="{%url 'settings'%}" class="nav-active">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tool"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5" /></svg>
-                  Settings
-                </a>
-              </li>
+              <a href="{%url 'tech_list'%}" class="nav-active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                  <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                </svg>
+                Technicians
+              </a>
+            </li>
 
-              <!-- <li>
-                <a href="{%url 'logout'%}">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-settings"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"
-                    />
-                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                  </svg>
-                  Log out
-                </a>
-              </li> -->
-            </ul>
-          </div>
+
+
+
+
+
+          </ul>
         </div>
-      </aside>
+      </div>
+    </aside>
       <main class="app-container">
         <div class="nav-container">
           <div class="child1">
@@ -427,14 +212,7 @@ transform: rotate(360deg);
               src="{%static 'assets/user.png'%}"
               alt=""
             />
-            <!-- <div class="dropdown">
-              <h6 class="mb-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ request.user }}
-              </h6>
-              <ul class="dropdown-menu" style="background-color: transparent;border: none;" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" style="text-align: end;" href="{% url 'logout' %}">Logout</a></li>
-              </ul>
-          </div> -->
+
 
 
           <div class="dropdown">
@@ -447,7 +225,7 @@ transform: rotate(360deg);
             </a>
 
             <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item text-danger" href="{%url 'logout'%}">Logout</a></li>
+                <li><a class="dropdown-item text-danger" href="{%url 'adminsignout'%}">Logout</a></li>
 
             </ul>
         </div>
@@ -464,7 +242,7 @@ transform: rotate(360deg);
                   <div class="dashboard-num-card">
                     <div class="border-bottom">
                       <div class="d-flex justify-content-between">
-                        <p class="fs-7 text-secondary mb-0">Total Booking</p>
+                        <p class="fs-7 text-secondary mb-0"> </p>
                         <span class="green p-2 rounded">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -498,7 +276,7 @@ transform: rotate(360deg);
                   <div class="dashboard-num-card">
                     <div class="border-bottom">
                       <div class="d-flex justify-content-between">
-                        <p class="fs-7 text-secondary mb-0">Total Voucher</p>
+                        <p class="fs-7 text-secondary mb-0"> </p>
                         <span class="purple p-2 rounded">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -535,7 +313,7 @@ transform: rotate(360deg);
                   <div class="dashboard-num-card">
                     <div class="border-bottom">
                       <div class="d-flex justify-content-between">
-                        <p class="fs-7 text-secondary mb-0">Total Invoices</p>
+                        <p class="fs-7 text-secondary mb-0"> </p>
                         <span class="orange p-2 rounded">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -569,7 +347,7 @@ transform: rotate(360deg);
                   <div class="dashboard-num-card">
                     <div class="border-bottom">
                       <div class="d-flex justify-content-between">
-                        <p class="fs-7 text-secondary mb-0">Profit</p>
+                        <p class="fs-7 text-secondary mb-0"></p>
                         <span class="orange p-2 rounded">
                           <svg
                             width="24"
@@ -598,7 +376,7 @@ transform: rotate(360deg);
                   <div class="dashboard-num-card">
                     <div class="border-bottom">
                       <div class="d-flex justify-content-between">
-                        <p class="fs-7 text-secondary mb-0">New Leads Added</p>
+                        <p class="fs-7 text-secondary mb-0">  </p>
                         <span class="green p-2 rounded">
                           <svg
                             width="24"
@@ -619,7 +397,7 @@ transform: rotate(360deg);
 
                     <div class="d-flex justify-content-between pt-3">
                       <span class="green fs-7 px-2 rounded"> {{ leads_percentage_change }}% </span>
-                      <p class="fs-8 text-secondary mb-0">Last Month</p>
+                      <p class="fs-8 text-secondary mb-0"> </p>
                     </div>
                   </div>
                 </div>
@@ -627,7 +405,7 @@ transform: rotate(360deg);
                   <div class="dashboard-num-card">
                     <div class="border-bottom">
                       <div class="d-flex justify-content-between">
-                        <p class="fs-7 text-secondary mb-0">Customers</p>
+                        <p class="fs-7 text-secondary mb-0"></p>
                         <span class="purple p-2 rounded">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -654,7 +432,7 @@ transform: rotate(360deg);
 
                     <div class="d-flex justify-content-between pt-3">
                       <span class="purple fs-7 px-2 rounded"> {{ customers_percentage_change }}% </span>
-                      <p class="fs-8 text-secondary mb-0">Last Month</p>
+                      <p class="fs-8 text-secondary mb-0"> </p>
                     </div>
                   </div>
                 </div>
@@ -685,7 +463,7 @@ transform: rotate(360deg);
                     </div>
                     <div>
                       <p class="mb-0" id="today"></p>
-                      <p class="text-secondary fs-8 mb-0"><span id="bookingCount">2</span> Resort Booked</p>
+                      <p class="text-secondary fs-8 mb-0"><span id="bookingCount">2</span>  </p>
                     </div>
                     <svg id="BookingClose" style="cursor: pointer;"  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x rounded-circle border ms-auto align-self-center"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                   </div>
@@ -702,78 +480,47 @@ transform: rotate(360deg);
             <div class="col-8">
               <div class="border rounded-3 px-4 py-3 recent-customer">
                 <div class="d-flex">
-                  <h5 class="col-4 fs-7 mb-0">Recent Invoice <span class="fs-8">\</span> Voucher</h5>
-                    <form  onsubmit="preventRefresh(e)">
-                        <select name="document_type" id="document_type" class="col-cst switch-invch" onchange="this.form.submit()">
-                          <option value="Invoice" {% if document_type == 'Invoice' %} selected {% endif %}>Invoice</option>
-                          <option value="Voucher" {% if document_type == 'Voucher' %} selected {% endif %}>Voucher</option>
-                        </select>
-                    </form>
-                    <a href="{% url 'customerlist' %}" id="documentLink" class="col-1 ms-auto text-decoration-none text-secondary border rounded-1 fs-7 text-center">See All</a>
+                  <h5 class="col-4 fs-7 mb-0">  <span class="fs-8">\</span> </h5>
+
+
+                  <a href="{% url 'ticketlist' %}" id="documentLink" class="col-1 ms-auto text-decoration-none text-secondary border rounded-1 fs-7 text-center">See All</a>
                 </div>
                 <table class="table custom-table-inx mt-2">
                     <thead>
                         <tr>
-                            <th scope="col">Number</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Bill Amount</th>
-                            <th scope="col">Paid Amount</th>
-                            <th scope="col">Due Amount</th>
+                   <th scope="col">No</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Title</th>
+                                <th scope="col">Time</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% if document_type == "Invoice" %}
-                        {% if recent_invoices %}
-                            {% for invoice in recent_invoices %}
+
+                        {% if tickets %}
+                            {% for t in tickets %}
                             <tr>
-                                <td>{{ invoice.invoice_number }}</td>
-                                <td>{{ invoice.invoice_date }}</td>
-                                <td>{{ invoice.customer.full_name }}</td>
-                                <td>₹ {{ invoice.total_amount }}</td>
-                                <td>₹ {{ invoice.recieved_price }}</td>
-                                <td>₹ {{ invoice.pending_price }}</td>
+                                <td>{{ t.forloop.counter }}</td>
+                                       <td>{{ t.created_by }}</td>
+                               <td>{{ t.title }}</td>
+                               <td>{{ t.created_at }}</td>
+
                             </tr>
                             {% endfor %}
-                        {% else %}
-                        <tr>
-                          <td colspan="6" class="text-center">No data found</td>
-                        </tr>
-                        {% endif %}
-                        {% elif document_type == "Voucher" %}
-                        {% if recent_vouchers %}
-                            {% for voucher in recent_vouchers %}
-                            <tr>
-                                <td>{{ voucher.voucher_number }}</td>
-                                <td>{{ voucher.voucher_date }}</td>
-                                <td>{{ voucher.customer.full_name }}</td>
-                                <td>₹ {{ voucher.total_amount }}</td>
-                                <td>₹ {{ voucher.recieved_price }}</td>
-                                <td>₹ {{ voucher.pending_price }}</td>
-                            </tr>
-                            {% endfor %}
-                        {% else %}
-                        <tr>
-                          <td colspan="6" class="text-center">No data found</td>
-                        </tr>
-                        {% endif %}
+
+
                         {% endif %}
                     </tbody>
                 </table>
             </div>
               <div class="border rounded-3 px-4 py-3 recent-leads mt-4">
                 <div class="d-flex justify-content-between mb-2">
-                  <h5 class="fs-6 mb-0">Recent Leads</h5>
-                  <a
-                    href="{%url 'leadlist'%}"
-                    class="text-decoration-none text-secondary px-2 border rounded-1 fs-7 text-center"
-                    >See All</a
-                  >
+
+
                 </div>
                 {% if recent_leads %}
                 {% for leads in recent_leads %}
                 <div class="d-flex justify-content-between border-bottom py-3">
-                  
+
                   <div>
                     <img
                       src="{%static 'assets/user.png'%}"
@@ -781,7 +528,7 @@ transform: rotate(360deg);
                       class="rounded-1 object-fit-cover"
                       style="width: 2.3rem; height: 2.3rem"
                     />
-                    
+
                     <h6 class="fs-7 d-inline mb-0 ms-2">{{ leads.full_name }}</h6>
                   </div>
                   <div class="text-secondary fs-7 align-self-center">
@@ -790,50 +537,33 @@ transform: rotate(360deg);
                 </div>
                 {% endfor %}
                   {% else %}
-                  <p class="text-center p-2">No data found</p>
+
                 {% endif %}
-                
-                
+
+
               </div>
             </div>
-            <div class="col-4">
-              <div class="upcoming-bookings h-100">
-                <h2 class="fs-6 mb-3">Upcoming Bookings</h2>
-                {% if upcoming_bookings %}
-                {% for invoice in upcoming_bookings %}
-                <div class="upcoming-item">
-          
-                  <div class="ms-2">
-                    <h6 class="text-uppercase fs-8 mb-0">{{ invoice.resort_name }}</h6>
-                    <p class="text-secondary fs-9 mb-1">{{ invoice.customer.full_name }}</p>
-                    <p class="text-secondary fs-9 mb-0">{{ invoice.invoice_date }}</p>
-                  </div>
-                  <!-- <span class="rounded-circle border p-1 align-self-center ms-auto"> -->
-                    <a href="{% url 'saleinvoiceview' invoice.id %}" class="rounded-circle border p-1 align-self-center ms-auto">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M9 6l6 6l-6 6" />
-                  </svg>
-                </a>
-                  <!-- </span> -->
+      <div class="col-4">
+    <div class="upcoming-bookings h-100">
+        <h2 class="fs-6 mb-3">Notifications</h2>
+        {% if notification %}
+            {% for ticket in notification %}
+                <div class="upcoming-item p-2 border-bottom">
+                    <p class="text-secondary fs-9 mb-0">
+                        🛠️ A new ticket is raised by <strong>{{ ticket.created_by.get_full_name }}</strong>
+                    </p>
+                    <p class="text-muted fs-9 mb-1">
+                        Ticket Title: {{ ticket.title }} | {{ ticket.created_at|date:"d M Y H:i" }}
+                    </p>
+
                 </div>
-                {% endfor %}
-                {% else %}
-                <p class="text-secondary fs-9 mb-0">No upcoming bookings found</p>
-                {% endif %}
-                </div>
-              </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-secondary fs-9 mb-0">No new notifications</p>
+        {% endif %}
+    </div>
+</div>
+
             </div>
           </div>
         </div>

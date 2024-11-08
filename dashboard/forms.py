@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 import re
+from dashboard.models import *
 
 User = get_user_model()
 
@@ -38,3 +39,10 @@ class SignUpForm(forms.ModelForm):
         if password and confirm_password and password != confirm_password:
             self.add_error('confirm_password', "Passwords do not match")
         return cleaned_data
+
+from django.forms import ModelForm
+class StatusUpdateForm(ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ['status']
+

@@ -1,41 +1,40 @@
 {% extends "base.html" %} {%block body_block%}
 <div class="leadedit">
-  <h1>Dashboard > Leads Management > View</h1>
+  <h1>Dashboard > Ticket Management > View</h1>
   <div class="border-top border-1">
-    <h2 class="fs-5 py-4">EDIT LEAD DETAILS</h2>
-    <form method="post" action="">
-      {% csrf_token %}
+    <h2 class="fs-5 py-4"> TICKET DETAILS</h2>
+    <form action="">
       <div class="grid-two-c">
         <div class="d-flex gap-5">
-          <label for="">Full Name:</label>
+          <label for="">Title:</label>
           <input
             type="text"
-            name="full_name"
-            value="{{lead.full_name}}"
+            name=""
+            value="{{ticket.title}}"
             id=""
             class="form-control"
             placeholder="Enter your Full Name"
+            readonly
           />
         </div>
         <div class="d-flex gap-5">
-          <label for="">Medium:</label>
-          <select name="medium" id="medium" class="form-select" >
-          <option value="Instagram" {% if lead.medium == 'Instagram' %}selected{% endif %}>Instagram</option>
-          <option value="Facebook" {% if lead.medium == 'Facebook' %}selected{% endif %}>Facebook</option>
-          <option value="Youtube" {% if lead.medium == 'Youtube' %}selected{% endif %}>Youtube</option>
-          <option value="Others" {% if lead.medium == 'Others' %}selected{% endif %}>Others</option>
+          <label for="">Status:</label>
+          <select name="" id="medium" class="form-select" disabled>
+          <option value="Instagram" >{{ticket.status}}</option>
+
           <!-- Add other options as needed -->
         </select>
         </div>
         <div class="d-flex gap-5 position-relative">
-          <label for="">Email:</label>
+          <label for="">Description:</label>
           <input
             type="email"
-            name="email"
-            value="{{lead.email}}"
+            value="{{ticket.description}}"
+            name=""
             id=""
             class="form-control"
             placeholder="Enter Email address"
+            readonly
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -57,68 +56,81 @@
           </svg>
         </div>
         <div class="d-flex gap-5 position-relative">
-          <label for="">Mobile:</label>
+          <label for="">Customer:</label>
           <input
             type="text"
-            name="mobile"
-            value="{{lead.mobile}}"
+            value="{{ticket.created_by}}"
+            name=""
             id=""
             class="form-control"
             placeholder="Enter Number"
+            readonly
           />
           <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-phone position-absolute top-50 end-0 translate-middle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>
         </div>
         <div class="d-flex gap-5 position-relative">
-          <label for="">Place:</label>
+          <label for="">Date & Time:</label>
           <input
             type="text"
-            name="place"
-            value="{{lead.place}}"
+            value="{{ticket.created_at}}"
+            name=""
             id=""
             class="form-control"
             placeholder="Enter your place"
+            readonly
+          />
+        </div>
+         <div class="d-flex gap-5 position-relative">
+          <label for="">Tag:</label>
+          <input
+            type="text"
+            value="{{lead.tag}}"
+            name=""
+            id=""
+            class="form-control"
+            placeholder="Enter your place"
+            readonly
           />
         </div>
         <div class="d-flex gap-5 position-relative">
           <label for="">Remarks:</label>
           <input
             type="text"
-            name="remarks"
             value="{{lead.remarks}}"
+            name=""
             id=""
             class="form-control"
             placeholder="Add remarks here"
+            readonly
+          />
+        </div>
+        <div class="d-flex gap-5 position-relative">
+          <label for="">Attended:</label>
+          <input
+            type="text"
+            value="{{lead.attended_by.username}}"
+            name=""
+            id=""
+            class="form-control"
+            placeholder=""
+            readonly
           />
         </div>
         <div
           class="d-flex justify-content-end mt-3 gap-4"
           style="grid-column: span 2"
         >
-          <button type="submit" class="save-btn px-5 py-2 rounded">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-check"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M5 12l5 5l10 -10" />
-            </svg>
-            SAVE CHANGES
-          </button>
-<!--          <button type="submit" class="theme-btn px-5 py-2 rounded">-->
-<!--            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>-->
-<!--            EDIT-->
-<!--          </button>-->
+
+
         </div>
       </div>
     </form>
+
+      <div class="add-button">
+      <a href="{%url 'ticket_status_update' ticket.title %}">
+        <button class="btn btn-primary text-white ">Update Status</button>
+      </a>
+    </div>
   </div>
 </div>
 {% endblock %}

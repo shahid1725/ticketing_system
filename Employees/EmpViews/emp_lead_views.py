@@ -25,28 +25,28 @@ def employee_leadadd(request):
 
     return render(request,'EmpLead/employee_Lead_Add.html')
 
-@login_required(login_url='employee_signin')
-def employee_leadlist(request):
-    lead_list=Leads.objects.all().order_by('-id')
-    query = request.GET.get('q')
-    if query:
-        lead_list = lead_list.filter(Q(full_name__icontains=query) | Q(mobile__icontains=query))
-
-    paginator=Paginator(lead_list, 10)
-    page_number=request.GET.get('page')
-    try:
-        lead=paginator.page(page_number)
-    except PageNotAnInteger:
-        lead=paginator.page(1)
-    except EmptyPage:
-        lead=paginator.page(paginator.num_pages)
-
-    today = timezone.now().date()
-    todays_leads = Leads.objects.filter(lead_date__date=today).order_by('-lead_date')
-
-    has_lead=paginator.count > 0
-
-    return render(request,'EmpLead/employee_Lead_List.html',{'lead':lead, 'has_lead': has_lead, 'todays_leads': todays_leads, 'query': query})
+# @login_required(login_url='employee_signin')
+# def employee_leadlist(request):
+#     lead_list=Leads.objects.all().order_by('-id')
+#     query = request.GET.get('q')
+#     if query:
+#         lead_list = lead_list.filter(Q(full_name__icontains=query) | Q(mobile__icontains=query))
+#
+#     paginator=Paginator(lead_list, 10)
+#     page_number=request.GET.get('page')
+#     try:
+#         lead=paginator.page(page_number)
+#     except PageNotAnInteger:
+#         lead=paginator.page(1)
+#     except EmptyPage:
+#         lead=paginator.page(paginator.num_pages)
+#
+#     today = timezone.now().date()
+#     todays_leads = Leads.objects.filter(lead_date__date=today).order_by('-lead_date')
+#
+#     has_lead=paginator.count > 0
+#
+#     return render(request,'EmpLead/employee_Lead_List.html',{'lead':lead, 'has_lead': has_lead, 'todays_leads': todays_leads, 'query': query})
 
 
 @login_required(login_url='employee_signin')

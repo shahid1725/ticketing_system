@@ -58,7 +58,7 @@ class Customers(models.Model):
 
 
 
-
+#
 # class Leads(models.Model):
 #     MEDIUM_CHOICES = [
 #         ('Instagram','Instagram'),
@@ -87,16 +87,36 @@ class Customers(models.Model):
 #     def __str__(self):
 #         return self.full_name
 
-class Leads(models.Model):
-    MEDIUM_CHOICES = [
-        ('OPEN', 'Open'),
-        ('IN_PROGRESS', 'In Progress'),
-        ('RESOLVED', 'Resolved'),
-        ('CLOSED', 'Closed'),
+# class Leads(models.Model):
+#     STATUS_CHOICES = [
+#         ('OPEN', 'Open'),
+#         ('IN_PROGRESS', 'In Progress'),
+#         ('RESOLVED', 'Resolved'),
+#         ('CLOSED', 'Closed'),
+#     ]
+#
+#     title = models.CharField(max_length=255)
+#     status=models.CharField(choices=STATUS_CHOICES,max_length=100,blank=True,null=True,default="IN_PROGRESS")
+#     description = models.TextField()
+#     attended_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+#     created_by = models.ForeignKey(CustomUser, related_name='tickets', on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#     def __str__(self):
+#         return self.title
+
+class Ticket(models.Model):
+    STATUS_CHOICES = [
+        ('OPEN', 'OPEN'),
+        ('IN_PROGRESS', 'IN_PROGRESS'),
+        ('RESOLVED', 'RESOLVED'),
+        ('CLOSED', 'CLOSED'),
+        ('Attended', 'Attended'),
     ]
 
     title = models.CharField(max_length=255)
-    status=models.CharField(choices=MEDIUM_CHOICES,max_length=100,blank=True,null=True)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=100, default="IN_PROGRESS")
     description = models.TextField()
     attended_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     created_by = models.ForeignKey(CustomUser, related_name='tickets', on_delete=models.CASCADE)
@@ -105,8 +125,6 @@ class Leads(models.Model):
 
     def __str__(self):
         return self.title
-
-
 
 
 

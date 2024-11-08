@@ -49,9 +49,9 @@ def leadlist(request):
     return render(request,'Lead/Lead_List.html',{'lead':lead, 'has_lead': has_lead, 'todays_leads': todays_leads, 'query': query})
 
 @login_required(login_url='admin_loginview')
-def lead_details(request,id):
-    lead=get_object_or_404(Leads,id=id)
-    return render(request,'Lead/Lead_Details.html',{'lead':lead})
+# def lead_details(request,id):
+#     lead=get_object_or_404(Leads,id=id)
+#     return render(request,'Lead/Lead_Details.html',{'lead':lead})
 
 @login_required(login_url='admin_loginview')
 def leadedit(request,id):

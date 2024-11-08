@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Navigo Trips - Admin</title>
+    <title>Ticket - Technician</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="{%static 'css/dashboard.css'%}" />
@@ -34,12 +34,12 @@
       <aside class="app-sidebar">
         <div class="p-4">
           <a href="{%url 'employee_index'%}">
-            <img src="{%static 'assets/logo.png'%}"  alt="" class="brand-logo" />
+            <img src="{%static 'assets/ticket.jpg'%}"  alt="" class="brand-logo" />
           </a>
           <div class="py-3">
             <ul class="sidebar-item text-decoration-none">
               <li>
-                <a href="{%url 'employee_index'%}" class="nav-active"
+                <a href="{%url 'tech_index'%}" class="nav-active"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -60,114 +60,9 @@
                   Dashboard
                 </a>
               </li>
-              <li style="background-color: transparent">
-                <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button
-                        class="accordion-button collapsed px-2 py-2 text-primary rounded fs-7"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="false"
-                        aria-controls="collapseOne"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-tag"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path
-                            d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
-                          />
-                          <path
-                            d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z"
-                          />
-                        </svg>
-                        Sales
-                      </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse">
-                      <div class="accordion-body">
-                        <ul class="list-unstyled acd-list">
-                          <li>
-                            <a href="{%url 'employee_customerlist'%}"> Customers </a>
-                          </li>
-                          <!-- <li><a href="{%url 'employee_resortlist'%}"> Resorts </a></li> -->
-                          <!-- <li><a href="{%url 'employee_guide_list' %}">Guide</a></li> -->
-                          <!-- <li><a href="{%url 'employee_ownresortlist'%}">Own Resorts</a></li> -->
-                          <li><a href="{%url 'employee_accountdetails'%}">Acccount Details</a></li>
-                          <li><a href="{%url 'employee_meallist'%}">Meal Plans</a></li>
-                          <li><a href="{%url 'employee_listitinerary'%}">Itinerary</a></li>
-                          
-                          <li style="background-color: transparent" class="py-0">
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                  <button
-                                    class="accordion-button collapsed ps-0 py-2 text-primary rounded fs-7"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOnet"
-                                    aria-expanded="false"
-                                    aria-controls="collapseOne"
-                                  >
-                                    Trip
-                                  </button>
-                                </h2>
-                                <div id="collapseOnet" class="accordion-collapse collapse">
-                                  <div class="accordion-body pb-0">
-                                    <ul class=" acd-list" style="list-style: disc;color: #0d6efd;">
-                                        <li><a href="{%url 'employee_tripinvoice'%}">Invoice</a></li>
-                                        <li><a href="{%url 'employee_tripvoucher'%}">Voucher</a></li>
-                                    </ul>
-                                    </div>
-                                    </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li style="background-color: transparent" class="py-0">
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                  <button
-                                    class="accordion-button collapsed ps-0 py-2 text-primary rounded fs-7"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOnes"
-                                    aria-expanded="false"
-                                    aria-controls="collapseOne"
-                                  >
-                                    Stay
-                                  </button>
-                                </h2>
-                                <div id="collapseOnes" class="accordion-collapse collapse">
-                                  <div class="accordion-body pb-0">
-                                    <ul class=" acd-list" style="list-style: disc;color: #0d6efd;">
-                                        <li><a href="{%url 'employee_saleinvoice'%}">Invoice</a></li>
-                                        <li><a href="{%url 'employee_salevoucher'%}">Voucher</a></li>
-                                    </ul>
-                                    </div>
-                                    </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+
               <li>
-                <a href="{%url 'employee_leadlist'%}" class="nav-active">
+                <a href="{%url 'tech_ticketlist'%}" class="nav-active">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -187,75 +82,14 @@
                       d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"
                     />
                   </svg>
-                  Lead
+                  Tickets
                 </a>
               </li>
-              
+
+
+
               <li>
-                <a href="{%url 'employee_report'%}" class="nav-active">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-folder"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"
-                    />
-                  </svg>
-                  Report
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'employee_profit_report' %}">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-text"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 12h6" /><path d="M9 16h6" /></svg>
-                  Profit Report</a>
-              </li>
-              <li>
-                <a href="{%url 'employee_packages'%}" class="nav-active">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-package"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                    <path d="M12 12l8 -4.5" />
-                    <path d="M12 12l0 9" />
-                    <path d="M12 12l-8 -4.5" />
-                    <path d="M16 5.25l-8 4.5" />
-                  </svg>
-                  Packages
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'employee_addscript' %}" class="nav-active">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-script"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 20h-11a3 3 0 0 1 0 -6h11a3 3 0 0 0 0 6h1a3 3 0 0 0 3 -3v-11a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v8" /></svg>
-                  Script
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'employee_addtag' %}" class="nav-active">
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bookmarks"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10v11l-5 -3l-5 3v-11a3 3 0 0 1 3 -3h4a3 3 0 0 1 3 3z" /><path d="M11 3h5a3 3 0 0 1 3 3v11" /></svg>
-                  Tag
-                </a>
-              </li>
-              <li>
-                <a href="{%url 'employee_logout'%}">
+                <a href="{%url 'tech_logout'%}">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"

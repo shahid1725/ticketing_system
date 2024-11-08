@@ -23,7 +23,8 @@ from .views import *
 
 
 urlpatterns=[
-    path('', views.AdminLogin.as_view(), name='signin'),
+    path('', views.AdminLogin.as_view(), name='adminlogin'),
+    path('signout', views.adminsignout, name='adminsignout'),
     path('index',views.index,name="index"),
     path('base', views.base, name="base"),
     path('reset_password/<int:user_id>/', views.reset_password, name='reset_password'),
@@ -31,10 +32,34 @@ urlpatterns=[
 
     path('lead/list', leadlist, name="leadlist"),
     path('lead/add', leadadd, name="leadadd"),
-    path('lead/details/<int:id>/', lead_details, name='lead_details'),
+    # path('lead/details/<int:id>/', lead_details, name='lead_details'),
     path('lead/edit/<int:id>/', leadedit, name="leadedit"),
     path('lead/attend/<int:id>/', leadattend, name='leadattend'),
     path('lead/attend/update/<int:id>/', update_lead_date, name='update_lead_date'),
+
+    path('ticket/list', ticketlist, name="ticketlist"),
+    path('ticket/details/<int:id>/', ticket_details, name='ticket_details'),
+    path('ticket/status/<str:title>/', TicketStatusUpdate.as_view(), name='ticket_status_update'),
+
+    path('tech/list', tech_list, name="tech_list"),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     path('employee/list', views.employeelist, name="employeelist"),
     path('employee/add', views.employeeadd, name="employeeadd"),
@@ -191,17 +216,7 @@ urlpatterns=[
     path('cancelvoucher/<int:voucher_id>/', cancelvoucher, name='cancelvoucher'),
     # Optional: Add a URL for sending the WhatsApp message separately
     path('send-cancel-voucher-message/<int:voucher_id>/', send_whatsapp_cancel_voucher_message, name='send_cancel_voucher_message'),
-    
-    path('send_stay/<int:stay_id>/', staywhatsapp, name='staywhatsapp'),
-    
-    
-
-    path('settings',Settings, name='settings')
 
 
-#------------------------------------ Cancel Invoice and Voucher ---------------------------------
-
-    # path('cancelinvoice/<int:id>/', cancelinvoice, name='cancelinvoice'),
-    # path('cancelvoucher/<int:id>/', cancelvoucher, name='cancelvoucher'),
 
 ]

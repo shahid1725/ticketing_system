@@ -19,6 +19,7 @@ from .EmpViews.emp_itinerary_views import *
 from .EmpViews.emp_guide_views import *
 from .EmpViews.emp_tripinvoice_views import *
 from .EmpViews.emp_tripvoucher_views import *
+from .views import *
 
 urlpatterns=[
     path('employee_base', views.employee_base, name="employee_base"),
@@ -26,12 +27,18 @@ urlpatterns=[
     path('employee_index',views.employee_index,name="employee_index"),
     path('logout', views.employee_logout, name="employee_logout"),
 
-    path('lead/list', employee_leadlist, name="employee_leadlist"),
+    # path('lead/list', employee_leadlist, name="employee_leadlist"),
     path('lead/add', employee_leadadd, name="employee_leadadd"),
     path('lead/details/<int:id>/', employee_lead_details, name='employee_lead_details'),
     path('lead/edit/<int:id>/', employee_leadedit, name="employee_leadedit"),
     path('lead/attend/<int:id>/', employee_leadattend, name="employee_leadattend"),
     path('lead/attend/update/<int:id>/', employee_update_lead_date, name='employee_update_lead_date'),
+
+    path('ticket/list', employee_ticketlist, name="employee_ticketlist"),
+    path('ticket/details/<int:id>/', employee_ticket_details, name='employee_ticket_details'),
+    path('ticket/status/<str:title>/', EmployeeTicketStatusUpdate.as_view(), name='employee_ticket_status_update'),
+
+
 
     
     # path('report', views.voucher_report, name="report"),
@@ -192,8 +199,7 @@ urlpatterns=[
     path('sales/guide/delete/<int:guide_id>/', employee_guide_delete, name='employee_guide_delete'),
 
 
-    path('email/invoice/download',views.employee_invoiceemail,name='employee_invoiceemail'),
-    path('email/voucher/download',views.employee_voucheremail,name='employee_voucheremail'),
+
 
     path('send_stay/<int:stay_id>/', staywhatsapp, name='staywhatsapp'),
     path('employee_send_stay_whatsapp/<int:stay_id>/', employee_send_stay_whatsapp_message, name='employee_send_stay_whatsapp'),

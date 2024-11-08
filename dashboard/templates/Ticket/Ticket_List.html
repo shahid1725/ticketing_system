@@ -29,46 +29,35 @@
         </div>
     </div>
 
-    <div class="add-button">
-      <a href="{%url 'leadadd'%}">
-        <button class="btn btn-primary text-white w-100">+ Add Lead</button>
-      </a>
-    </div>
 </div>
-  <h6 class="mt-4 mb-1">Scheduled for today</h6>
+  <h6 class="mt-4 mb-1">Attended Tickets</h6>
   <div class="border border-secondary-subtle rounded-3 mt-4">
     <table class="table custom-table">
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Date</th>
-          <th scope="col">Invoice No</th>
           <th scope="col">Customer</th>
-          <th scope="col">Price Quoted</th>
-          <th scope="col">Date</th>
-          <th scope="col">Time</th>
+          <th scope="col">Title</th>
+
           <th scope="col">Attend</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-      {% if todays_leads %}
-        {% for lead in todays_leads %}
+      {% if solved_ticket %}
+        {% for t in solved_ticket %}
         <tr>
-          <td scope="row">{{ forloop.counter }}</td>
-          <td>{{ lead.full_name }}</td>
-          <td>{{ lead.mobile }}</td>
-          <td>{{ lead.email }}</td>
-          <td>{{ lead.place }}</td>
-          <td>{{ lead.lead_date|date:"d/m/Y" }}</td>
-          <td>{{ lead.lead_date|date:"h:i A" }}</td>
-          <td><a href="{% url 'leadattend' lead.id %}" class="attend-btn rounded-pill">Attended</a></td>
+          <td scope="row">{{forloop.counter}}</td>
+          <td>{{t.created_by}}</td>
+          <td>{{t.title}}</td>
+
+          <td><a href="" class="attend-btn rounded-pill">{{t.status}}</a></td>
           <td>
-              <div class="d-flex gap-3">
-                  <a href="{% url 'lead_details' lead.id %}" class="view-btn rounded-pill px-3">View</a>
-              </div>
+            <div class="d-flex gap-3">
+              <a href="{%url 'ticket_details' t.id %}" class="view-btn rounded-pill px-3">Attend</a>
+            </div>
           </td>
-      </tr>
+        </tr>
       {% endfor %}
       {% else %}
       <tr>
@@ -78,33 +67,31 @@
       </tbody>
     </table>
   </div>
-  <h6 class="mt-4 mb-1">New Leads</h6>
+  <h6 class="mt-4 mb-1">New Tickets</h6>
   <div class="border border-secondary-subtle rounded-3 mt-4">
     <table class="table custom-table">
       <thead>
         <tr>
           <th scope="col">No</th>
           <th scope="col">Customer</th>
-          <th scope="col">Mobile</th>
-          <th scope="col">Email</th>
-          <th scope="col">Place</th>
+          <th scope="col">Title</th>
+
           <th scope="col">Attend</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-      {% if lead %}
-      {% for i in lead %}
+      {% if ticket %}
+      {% for i in ticket %}
         <tr>
-          <td scope="row">{{forloop.counter0|add:lead.start_index}}</td>
-          <td>{{i.full_name}}</td>
-          <td>{{i.mobile}}</td>
-          <td>{{i.email}}</td>
-          <td>{{i.place}}</td>
-          <td><a href="{%url 'leadattend' i.id %}" class="attend-btn rounded-pill">Attended</a></td>
+          <td scope="row">{{forloop.counter}}</td>
+          <td>{{i.created_by}}</td>
+          <td>{{i.title}}</td>
+
+          <td><a href="" class="attend-btn rounded-pill">{{i.status}}</a></td>
           <td>
             <div class="d-flex gap-3">
-              <a href="{%url 'lead_details' i.id %}" class="view-btn rounded-pill px-3">View</a>
+              <a href="{%url 'ticket_details' i.id %}" class="view-btn rounded-pill px-3">Attend</a>
             </div>
           </td>
         </tr>
@@ -119,14 +106,14 @@
   </div>
 
   <div class="d-flex justify-content-center gap-3 mt-4">
-    {% if lead.has_previous %}
+    {% if ticket.has_previous %}
     <a href="?page=1" class="pagination-btn">< First</a>
-    <a href="?page={{ lead.previous_page_number }}" class="pagination-btn">< Previous</a>
+    <a href="?page={{ ticket.previous_page_number }}" class="pagination-btn">< Previous</a>
     {% endif %}
 
-    {% if lead.has_next %}
-    <a href="?page={{ lead.next_page_number }}" class="pagination-btn">Next ></a>
-    <a href="?page={{ lead.paginator.num_pages }}" class="pagination-btn">Last ></a>
+    {% if ticket.has_next %}
+    <a href="?page={{ ticket.next_page_number }}" class="pagination-btn">Next ></a>
+    <a href="?page={{ ticket.paginator.num_pages }}" class="pagination-btn">Last ></a>
     {% endif %}
   </div>
 </div>

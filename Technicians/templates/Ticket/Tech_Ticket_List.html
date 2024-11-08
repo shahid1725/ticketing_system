@@ -1,0 +1,138 @@
+{% extends "tech_base.html" %} {%block body_block%}
+<div class="leadlist">
+
+  <div class="d-flex justify-content-center">
+    {% for message in messages %}
+    <p class="alert alert-primary message custom-message px-3">{{ message }}</p>
+    {% endfor %}
+  </div>
+
+  <h1>Dashboard > Ticket Management</h1>
+  <div class="d-flex justify-content-between gap-2 mb-4">
+    <div class="flex-grow-1">
+        <div>
+          <form action="" method="get" class="d-flex gap-3">
+              <div class="position-relative w-100">
+                <input type="text" name="q" value="{{query|default:'' }}" class="form-control" placeholder="Search by name or Mobile number">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-search position-absolute top-50 end-0 translate-middle">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                </svg>
+              </div>
+              <div class="add-button">
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+          </form>
+        </div>
+    </div>
+
+    <div class="add-button">
+      <a href="{%url 'tech_ticketadd'%}">
+        <button class="btn btn-primary text-white w-100">+ Raise Ticket</button>
+      </a>
+    </div>
+</div>
+  <h6 class="mt-4 mb-1">Attended Tickets</h6>
+  <div class="border border-secondary-subtle rounded-3 mt-4">
+    <table class="table custom-table">
+      <thead>
+      <tr>
+          <th scope="col">No</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Title</th>
+
+          <th scope="col">Attend</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if solved_ticket %}
+        {% for t in solved_ticket %}
+        <tr>
+          <td scope="row">{{forloop.counter}}</td>
+          <td>{{t.created_by}}</td>
+          <td>{{t.title}}</td>
+
+          <td><a href="" class="attend-btn rounded-pill">{{t.status}}</a></td>
+          <td>
+            <div class="d-flex gap-3">
+              <a href="{%url 'ticket_details' t.id %}" class="view-btn rounded-pill px-3">Attend</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="11" class="text-center p-4">No data found</td>
+      </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <h6 class="mt-4 mb-1">New Leads</h6>
+  <div class="border border-secondary-subtle rounded-3 mt-4">
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Ticket</th>
+          <th scope="col">Created Time</th>
+          <th scope="col">Attended By</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if lead %}
+      {% for i in lead %}
+        <tr>
+          <td scope="row">{{forloop.counter0|add:lead.start_index}}</td>
+          <td>{{i.title}}</td>
+          <td>{{i.created_at}}</td>
+          <td>{{i.attended_by}}</td>
+          <td><a href="" class="attend-btn rounded-pill">{{i.status}}</a></td>
+          <td>
+            <div class="d-flex gap-3">
+              <a href="{%url 'tech_ticket_details' i.id %}" class="view-btn rounded-pill px-3">View</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="11" class="text-center p-4">No data found</td>
+      </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center gap-3 mt-4">
+    {% if lead.has_previous %}
+    <a href="?page=1" class="pagination-btn">< First</a>
+    <a href="?page={{ lead.previous_page_number }}" class="pagination-btn">< Previous</a>
+    {% endif %}
+
+    {% if lead.has_next %}
+    <a href="?page={{ lead.next_page_number }}" class="pagination-btn">Next ></a>
+    <a href="?page={{ lead.paginator.num_pages }}" class="pagination-btn">Last ></a>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+
+  const messages = document.querySelectorAll('.message');
+
+
+  messages.forEach(message => {
+    setTimeout(() => {
+      message.remove();
+    }, 2000);
+  });
+</script>
+
+{% endblock %}

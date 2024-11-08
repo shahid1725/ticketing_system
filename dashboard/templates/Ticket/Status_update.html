@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="content-body">
+    <div class="container-fluid">
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li
+                    {% if message.tags %} class="{{ message.tags }} alert alert-success" {% endif %}>{{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+
+        <div class="row">
+            <!-- <div class="col-xl-1 col-lg-2"></div> -->
+            <div class="col-xl-12 col-lg-8">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Update Status</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form action="" method="post" enctype="multipart/form-data" class="form-section"
+                                  id="regForm">
+                                {%csrf_token%}
+
+
+
+                            <label for="">Status:</label>
+                            <select name="status" id="" class="form-select">
+                                <option value="" selected disabled>Select Medium</option>
+                                <option value="OPEN">OPEN</option>
+                                <option value="IN_PROGRESS">IN_PROGRESS</option>
+                                <option value="RESOLVED">RESOLVED</option>
+                                   <option value="CLOSED">CLOSED</option>
+                                <option value="Attended">Attended</option>
+                            </select>
+
+
+                        </div>
+
+
+
+                                <div class="footer1">
+                                    <button class="btn btn-primary" type="submit" onclick="">Save and Submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="col-xl-1 col-lg-2"></div> -->
+
+        </div>
+
+
+    </div>
+
+
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+{%endblock%}
