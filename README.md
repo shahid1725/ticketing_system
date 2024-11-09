@@ -19,7 +19,7 @@ Installation
 
 Clone the repository
 
-git clone https://github.com/yourusername/django-ticketing.git
+git clone https://github.com/shahid1725/ticketing_system.git
 
 cd Televate
 

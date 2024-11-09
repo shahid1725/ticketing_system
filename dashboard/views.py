@@ -181,7 +181,7 @@ def reset_password(request, user_id):
 
 
 
-@login_required(login_url='admin_loginview')
+
 def ticketlist(request):
     ticketlist=Ticket.objects.exclude(status='Attended').order_by('-id')
     solved_ticket = Ticket.objects.all().filter(status='Attended')
@@ -207,7 +207,7 @@ def ticketlist(request):
 
 
 
-@login_required(login_url='admin_loginview')
+
 def ticket_details(request,id):
     ticket=get_object_or_404(Ticket,id=id)
     return render(request,'Ticket/Ticket_Details.html',{'ticket':ticket})
