@@ -60,12 +60,13 @@ def employee_index(request):
 
 @login_required(login_url='employee_signin')
 def employee_ticketlist(request):
-    ticket_list=Ticket.objects.all().order_by('-id')
+    ticket_list=Ticket.objects.exclude(status='Attended').order_by('-id')
+    solved_ticket = Ticket.objects.all().filter(status='Attended')
     query = request.GET.get('q')
     if query:
         ticket_list = ticket_list.filter(Q(full_name__icontains=query) | Q(mobile__icontains=query))
 
-    return render(request,'Ticket/employee_ticket_List.html',{'ticket_list':ticket_list, 'query': query})
+    return render(request,'Ticket/employee_ticket_List.html',{'ticket_list':ticket_list, 'query': query,'solved_ticket':solved_ticket})
 
 @login_required(login_url='employee_signin')
 def employee_ticket_details(request,id):
@@ -85,6 +86,11 @@ class EmployeeTicketStatusUpdate(UpdateView):
         return get_object_or_404(Ticket, title=title)
 
     def form_valid(self, form):
+        # Set the attended_by field to the currently logged-in user
+        ticket = form.save(commit=False)
+        ticket.attended_by = self.request.user
+        ticket.save()
+
         # Add your success message here
-        messages.success(self.request, 'Status successfully Updated')
+        messages.success(self.request, 'Status successfully updated')
         return super().form_valid(form)

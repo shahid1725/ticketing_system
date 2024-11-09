@@ -141,8 +141,9 @@ def tech_ticketadd(request):
 
 
 def tech_ticketlist(request):
-    lead_list=Ticket.objects.exclude(status='Attended').order_by('-id')
-    solved_ticket = Ticket.objects.all().filter(status='Attended')
+    current_user = request.user
+    lead_list = Ticket.objects.filter(created_by=current_user).exclude(status='Attended').order_by('-id')
+    solved_ticket = Ticket.objects.filter(created_by=current_user, status='Attended')
     query = request.GET.get('q')
     if query:
         lead_list = lead_list.filter(Q(full_name__icontains=query) | Q(mobile__icontains=query))
@@ -223,4 +224,4 @@ def tech_lead_details(request,id):
 
 def tech_ticket_details(request,id):
     ticket=get_object_or_404(Ticket,id=id)
-    return render(request,'Ticket/Ticket_Details.html',{'ticket':ticket})
+    return render(request,'Ticket/Tech_Ticket_Details.html',{'ticket':ticket})

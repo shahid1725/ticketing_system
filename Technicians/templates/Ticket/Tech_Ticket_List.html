@@ -43,8 +43,9 @@
           <th scope="col">No</th>
           <th scope="col">Customer</th>
           <th scope="col">Title</th>
+           <th scope="col">Attend By</th>
 
-          <th scope="col">Attend</th>
+
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -56,11 +57,10 @@
           <td>{{t.created_by}}</td>
           <td>{{t.title}}</td>
 
+
           <td><a href="" class="attend-btn rounded-pill">{{t.status}}</a></td>
           <td>
-            <div class="d-flex gap-3">
-              <a href="{%url 'ticket_details' t.id %}" class="view-btn rounded-pill px-3">Attend</a>
-            </div>
+
           </td>
         </tr>
       {% endfor %}
